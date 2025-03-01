@@ -19,7 +19,7 @@ function mergeConfig(
   source?: ConfigOverrides,
   ...[def, ...defs]: [TypedFlatConfigItem, ...Array<TypedFlatConfigItem>]
 ): TypedFlatConfigItem {
-  const reversedDefs = [def, ...defs].toReversed();
+  const reversedDefs = [def, ...defs].reverse();
   const mergedDef: TypedFlatConfigItem = {
     ...Object.fromEntries(reversedDefs.flatMap((def) => Object.entries(def))),
     ...Object.fromEntries(
