@@ -1,6 +1,6 @@
 {
   "name": "test-svelte",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "private": true,
   "dependencies": {
     "@tsconfig/svelte": "^5.0.4"

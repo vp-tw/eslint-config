@@ -1,6 +1,6 @@
 {
   "name": "test-react",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "private": true,
   "dependencies": {
     "@storybook/preview-api": "^8.5.2",
