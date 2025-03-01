@@ -1,9 +1,11 @@
-import antfu, { combine } from "@antfu/eslint-config";
+import type antfu from "@antfu/eslint-config";
+import type { ConfigNames as AntfuConfigNames } from "@antfu/eslint-config";
+import { combine } from "@antfu/eslint-config";
+import { composer } from "eslint-flat-config-utils";
 import { flatConfigsToRulesDTS } from "eslint-typegen/core";
 import fs from "fs-extra";
 import path from "pathe";
 import { packageDirectory } from "pkg-dir";
-import { antfuOptions } from "../../../eslint.config.antfuOptions";
 import { mdx } from "../src/configs/mdx";
 import { prettier } from "../src/configs/prettier";
 import { reactCompiler } from "../src/configs/reactCompiler";
@@ -11,6 +13,7 @@ import { storybook } from "../src/configs/storybook";
 import { imports } from "../src/extends/imports";
 import { javascript } from "../src/extends/javascript";
 import { jsonc } from "../src/extends/jsonc";
+
 import { react } from "../src/extends/react";
 import {
   sortJsonArrayValues,
@@ -37,17 +40,70 @@ import { yaml } from "../src/extends/yaml";
   );
 
   const extendsConfigs = await (async () => {
-    const antfuConfig = antfu(antfuOptions);
-    javascript(antfuConfig);
-    imports(antfuConfig);
-    typescript(antfuConfig);
-    jsonc(antfuConfig);
-    yaml(antfuConfig);
-    react(antfuConfig);
-    sortTsconfigJson(antfuConfig);
-    sortJsonKeys(antfuConfig);
-    sortJsonArrayValues(antfuConfig);
-    return antfuConfig;
+    const allAntfuConfigNames = [
+      "antfu/astro/setup",
+      "antfu/astro/rules",
+      "antfu/eslint-comments/rules",
+      "antfu/formatter/setup",
+      "antfu/imports/rules",
+      "antfu/javascript/setup",
+      "antfu/javascript/rules",
+      "antfu/jsx/setup",
+      "antfu/jsdoc/rules",
+      "antfu/jsonc/setup",
+      "antfu/jsonc/rules",
+      "antfu/markdown/setup",
+      "antfu/markdown/processor",
+      "antfu/markdown/parser",
+      "antfu/markdown/disables",
+      "antfu/node/rules",
+      "antfu/perfectionist/setup",
+      "antfu/react/setup",
+      "antfu/react/rules",
+      "antfu/solid/setup",
+      "antfu/solid/rules",
+      "antfu/sort/package-json",
+      "antfu/stylistic/rules",
+      "antfu/svelte/setup",
+      "antfu/svelte/rules",
+      "antfu/test/setup",
+      "antfu/test/rules",
+      "antfu/toml/setup",
+      "antfu/toml/rules",
+      "antfu/regexp/rules",
+      "antfu/typescript/setup",
+      "antfu/typescript/parser",
+      "antfu/typescript/rules",
+      "antfu/unicorn/rules",
+      "antfu/unocss",
+      "antfu/vue/setup",
+      "antfu/vue/rules",
+      "antfu/yaml/setup",
+      "antfu/yaml/rules",
+    ] satisfies Array<AntfuConfigNames>;
+    type RuntimeAntfuConfigNames = (typeof allAntfuConfigNames)[number];
+    /**
+     * Make sure following type assertions are correct.
+     */
+    undefined as unknown as RuntimeAntfuConfigNames satisfies AntfuConfigNames;
+    undefined as unknown as AntfuConfigNames satisfies RuntimeAntfuConfigNames;
+    const stubAntfuConfig: ReturnType<typeof antfu> = (() => {
+      let c = composer();
+      allAntfuConfigNames.forEach((name) => {
+        c = c.append({ name });
+      });
+      return c;
+    })();
+    javascript(stubAntfuConfig);
+    imports(stubAntfuConfig);
+    typescript(stubAntfuConfig);
+    jsonc(stubAntfuConfig);
+    yaml(stubAntfuConfig);
+    react(stubAntfuConfig);
+    sortTsconfigJson(stubAntfuConfig);
+    sortJsonKeys(stubAntfuConfig);
+    sortJsonArrayValues(stubAntfuConfig);
+    return stubAntfuConfig;
   })();
 
   /**

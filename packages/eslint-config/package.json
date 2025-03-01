@@ -52,7 +52,7 @@
     "local-pkg": "catalog:"
   },
   "devDependencies": {
-    "eslint-typegen": "^1.0.0",
+    "eslint-typegen": "^2.0.0",
     "unbuild": "^3.3.1"
   },
   "peerDependencies": {

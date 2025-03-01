@@ -86,7 +86,7 @@ function extendsConfigInternal<
           typeof config === "function" ? await config(source) : await config;
         return Array.isArray(awaited) ? awaited : [awaited];
       })();
-      return items.toSpliced(index, 1, ...newConfigs);
+      return [...items].splice(index, 1, ...newConfigs);
     },
   ]);
 }
