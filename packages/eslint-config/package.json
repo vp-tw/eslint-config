@@ -43,7 +43,7 @@
     "copy": "tsx scripts/copy",
     "prepare": "run-s typegen",
     "prepublishOnly": "run-s build copy",
-    "typegen": "tsx scripts/typegen"
+    "typegen": "jiti scripts/typegen"
   },
   "dependencies": {
     "@mui/types": "catalog:",

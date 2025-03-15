@@ -56,46 +56,6 @@ pnpm -w v:major
 pnpm -r publish
 ```
 
-## Known Issues
-
-### `eslint-plugin-unicorn@^57.0.0`
-
-Getting the following error when call `typegen`:
-
-<!-- cSpell:disable -->
-
-```
-/eslint-config/node_modules/.pnpm/eslint-plugin-unicorn@57.0.0_eslint@9.21.0_jiti@2.4.2_/node_modules/eslint-plugin-unicorn/rules…
-│     atisIdentifierName,
-│     at^
-│ TypeError: Cannot destructure property 'isIdentifierName' of 'import_helper_validator_identifier.default' as it is undefined.
-│     at resolveVariableName (/eslint-config/node_modules/.pnpm/eslint-plugin-unicorn@57.0.0_eslint@9.21.0_jiti@2.4.2_/node_modules…
-│     at Object.<anonymous> (/eslint-config/node_modules/.pnpm/eslint-plugin-unicorn@57.0.0_eslint@9.21.0_jiti@2.4.2_/node_modules/…
-│     at Module._compile (node:internal/modules/cjs/loader:1739:14)
-│     at Object.transformer (/eslint-config/node_modules/.pnpm/tsx@4.19.3/node_modules/tsx/dist/register-DCnOAxY2.cjs:2:1186)
-│     at Module.load (node:internal/modules/cjs/loader:1473:32)
-│     at Function._load (node:internal/modules/cjs/loader:1285:12)
-│     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-│     at wrapModuleLoad (node:internal/modules/cjs/loader:234:24)
-│     at Module.require (node:internal/modules/cjs/loader:1495:12)
-│     at require (node:internal/modules/helpers:135:16)
-```
-
-<!-- cSpell:enable -->
-
-Workaround: downgrade `eslint-plugin-unicorn` to `^56.0.1`.
-
-```jsonc
-// package.json
-{
-  "pnpm": {
-    "overrides": {
-      "eslint-plugin-unicorn": "^56.0.1",
-    },
-  },
-}
-```
-
 ## License
 
 MIT © ViPro <vdustr@gmail.com> (<http://vdustr.dev>)

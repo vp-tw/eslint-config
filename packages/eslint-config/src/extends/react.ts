@@ -1,7 +1,8 @@
 import type { ConfigOverrides, VpComposer } from "../types";
+import { GLOB_MARKDOWN_CODE } from "@antfu/eslint-config";
 import { omit, pick } from "es-toolkit";
 import { reactCompiler } from "../configs/reactCompiler";
-import { GLOB_REACT_IN_MD } from "../globs";
+import { GLOB_MDX_CODE } from "../globs";
 import { extendsConfig } from "../utils/extendsConfig";
 import { mergeConfig } from "../utils/mergeConfig";
 import { ignoreKeys } from "./_utils";
@@ -49,7 +50,7 @@ const react = (composer: VpComposer, options?: react.Options) => {
       {
         ...modifiedConfig,
         name: "vdustr/react/md/rules",
-        files: [GLOB_REACT_IN_MD],
+        files: [GLOB_MARKDOWN_CODE, GLOB_MDX_CODE],
         rules: {
           "react-compiler/react-compiler": "off",
           "react-hooks/rules-of-hooks": "off",

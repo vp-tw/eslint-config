@@ -80,6 +80,7 @@ import { yaml } from "../src/extends/yaml";
       "antfu/vue/rules",
       "antfu/yaml/setup",
       "antfu/yaml/rules",
+      "antfu/yaml/pnpm-workspace",
     ] satisfies Array<AntfuConfigNames>;
     type RuntimeAntfuConfigNames = (typeof allAntfuConfigNames)[number];
     /**

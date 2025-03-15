@@ -38,10 +38,20 @@ const yaml = (composer: VpComposer, options?: yaml.Options) => {
       },
       omittedConfig,
     );
+    return [modifiedConfig, rulesConfig];
+  });
+  extendsConfig(composer, "antfu/yaml/pnpm-workspace", (config) => {
+    const modifiedConfig = mergeConfig(
+      pick(options?.yaml ?? {}, ["files", "ignores"]),
+      {
+        ...config,
+        files: [GLOB_PNPM_WORKSPACE_YAML],
+      },
+    );
+    const omittedConfig = omit(modifiedConfig, ignoreKeys);
     const sortKeysConfig = mergeConfig(options?.sortKeys, {
-      ...omit(omittedConfig, ["files", "ignores"]),
+      ...omittedConfig,
       name: "vdustr/yaml/sort-keys/rules",
-      files: [GLOB_PNPM_WORKSPACE_YAML],
       rules: {
         "yaml/sort-keys": [
           "error",
@@ -56,7 +66,7 @@ const yaml = (composer: VpComposer, options?: yaml.Options) => {
         ],
       },
     });
-    return [modifiedConfig, rulesConfig, sortKeysConfig];
+    return [config, sortKeysConfig];
   });
 };
 
