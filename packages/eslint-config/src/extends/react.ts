@@ -1,6 +1,7 @@
 import type { ConfigOverrides, VpComposer } from "../types";
 import { omit, pick } from "es-toolkit";
 import { reactCompiler } from "../configs/reactCompiler";
+import { GLOB_REACT_IN_MD } from "../globs";
 import { extendsConfig } from "../utils/extendsConfig";
 import { mergeConfig } from "../utils/mergeConfig";
 import { ignoreKeys } from "./_utils";
@@ -10,6 +11,7 @@ namespace react {
     react?: ConfigOverrides;
     reactCompiler?: reactCompiler.Options["reactCompiler"];
     reactCompilerSetup?: reactCompiler.Options["setup"];
+    md?: ConfigOverrides;
   }
 }
 
@@ -37,7 +39,25 @@ const react = (composer: VpComposer, options?: react.Options) => {
         pick(omittedConfig, ["files", "ignores"]),
       ),
     });
-    return [modifiedConfig, rulesConfig, ...reactCompilerConfigs];
+    /**
+     * Disable rules not suitable for MD / MDX files.
+     */
+    const mdConfig = mergeConfig(
+      {
+        ...(options?.md ?? {}),
+      },
+      {
+        ...modifiedConfig,
+        name: "vdustr/react/md/rules",
+        files: [GLOB_REACT_IN_MD],
+        rules: {
+          "react-compiler/react-compiler": "off",
+          "react-hooks/rules-of-hooks": "off",
+          "react-refresh/only-export-components": "off",
+        },
+      },
+    );
+    return [modifiedConfig, rulesConfig, ...reactCompilerConfigs, mdConfig];
   });
 };
 
