@@ -47,6 +47,7 @@
     "eslint-plugin-react-compiler": "catalog:",
     "eslint-plugin-storybook": "catalog:",
     "eslint-plugin-svelte": "catalog:",
+    "eslint-plugin-yml": "catalog:",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.7",
