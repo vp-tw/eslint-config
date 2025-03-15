@@ -63,7 +63,8 @@
     "eslint-plugin-mdx": "catalog:",
     "eslint-plugin-package-json": "catalog:",
     "eslint-plugin-react-compiler": "catalog:",
-    "eslint-plugin-storybook": "catalog:"
+    "eslint-plugin-storybook": "catalog:",
+    "eslint-plugin-yml": "catalog:"
   },
   "peerDependenciesMeta": {
     "@types/eslint-config-prettier": {
@@ -82,6 +83,9 @@
       "optional": true
     },
     "eslint-plugin-storybook": {
+      "optional": true
+    },
+    "eslint-plugin-yml": {
       "optional": true
     }
   },
