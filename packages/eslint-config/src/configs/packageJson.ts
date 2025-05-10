@@ -14,15 +14,16 @@ namespace packageJson {
 const packageJson = async (options?: packageJson.Options) => {
   await ensurePackages(["eslint-plugin-package-json"]);
   const packageJson = await interopDefault(
-    import("eslint-plugin-package-json/configs/recommended"),
+    import("eslint-plugin-package-json"),
   );
+  const recommended = packageJson.configs.recommended;
   const packageJsonSetupConfig: TypedFlatConfigItem = {
-    plugins: packageJson.plugins,
+    plugins: recommended.plugins,
     name: "vdustr/package-json/setup",
   };
   const packageJsonRulesConfig = mergeConfig(options?.packageJson, {
-    ...omit(packageJson, ["name", "plugins"]),
-    rules: renameRules(packageJson.rules),
+    ...omit(recommended, ["name", "plugins"]),
+    rules: renameRules(recommended.rules),
     name: "vdustr/package-json/rules",
   });
   return [packageJsonSetupConfig, packageJsonRulesConfig];
