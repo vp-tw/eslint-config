@@ -19,13 +19,16 @@
   "version": "0.2",
   "words": [
     "antfu",
+    "commitizen",
     "esbuild",
+    "jiti",
     "jsdoc",
     "mkdist",
     "nvmrc",
     "pathe",
     "unocss",
     "unrs",
-    "vdustr"
+    "vdustr",
+    "vitest"
   ]
 }

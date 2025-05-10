@@ -4,8 +4,8 @@
   "private": true,
   "description": "Test React lint rules",
   "dependencies": {
-    "@storybook/preview-api": "^8.5.2",
-    "@storybook/react": "^8.5.2",
+    "@storybook/preview-api": "catalog:",
+    "@storybook/react": "catalog:",
     "@types/react": "catalog:"
   }
 }

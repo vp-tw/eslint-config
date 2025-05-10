@@ -4,6 +4,6 @@
   "private": true,
   "description": "Test Svelte lint rules",
   "dependencies": {
-    "@tsconfig/svelte": "^5.0.4"
+    "@tsconfig/svelte": "catalog:"
   }
 }
