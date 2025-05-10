@@ -15,6 +15,7 @@ import { mdx } from "./configs/mdx";
 import { packageJson } from "./configs/packageJson";
 import { prettier } from "./configs/prettier";
 import { storybook } from "./configs/storybook";
+import { tanstackQuery } from "./configs/tanstackQuery";
 import { imports } from "./extends/imports";
 import { javascript } from "./extends/javascript";
 import { jsonc } from "./extends/jsonc";
@@ -41,19 +42,21 @@ type Options = ReplaceAntfuEslintRulesWithVpRulesDeeply<
     react?: react.Options;
   };
   packageJson?: boolean | packageJson.Options;
+  emotion?: boolean | emotion.Options;
+  tanstackQuery?: boolean | tanstackQuery.Options;
   mdx?: boolean | mdx.Options;
   storybook?: boolean | storybook.Options;
   prettier?: boolean | prettier.Options;
-  emotion?: boolean | emotion.Options;
 };
 
 const ownedConfigNames = [
   "extends",
   "packageJson",
+  "emotion",
+  "tanstackQuery",
   "mdx",
   "storybook",
   "prettier",
-  "emotion",
 ] as const satisfies Array<keyof Options>;
 
 const vdustr = (
@@ -69,10 +72,13 @@ const vdustr = (
   const vpOptions = pick(options ?? {}, ownedConfigNames);
 
   const packageJsonEnabled: boolean = Boolean(vpOptions?.packageJson ?? true);
-  const storybookEnabled: boolean = Boolean(vpOptions?.storybook ?? false);
-  const mdxEnabled: boolean = Boolean(vpOptions?.mdx ?? false);
-  const prettierEnabled: boolean = Boolean(vpOptions?.prettier ?? true);
   const emotionEnabled: boolean = Boolean(vpOptions?.emotion ?? false);
+  const tanstackQueryEnabled: boolean = Boolean(
+    vpOptions?.tanstackQuery ?? false,
+  );
+  const mdxEnabled: boolean = Boolean(vpOptions?.mdx ?? false);
+  const storybookEnabled: boolean = Boolean(vpOptions?.storybook ?? false);
+  const prettierEnabled: boolean = Boolean(vpOptions?.prettier ?? true);
 
   let config: VpComposer = antfu({
     ...antfuOptions,
@@ -96,6 +102,16 @@ const vdustr = (
   yaml(config, vpOptions?.extends?.yaml);
   react(config, vpOptions?.extends?.react);
 
+  if (packageJsonEnabled) {
+    const packageJsonOptions: undefined | packageJson.Options =
+      typeof vpOptions?.packageJson !== "object"
+        ? undefined
+        : vpOptions.packageJson;
+    config = config.append(
+      packageJson(...(!packageJsonOptions ? [] : [packageJsonOptions])),
+    );
+  }
+
   if (emotionEnabled) {
     const emotionOptions: undefined | emotion.Options =
       typeof vpOptions?.emotion !== "object" ? undefined : vpOptions.emotion;
@@ -104,13 +120,13 @@ const vdustr = (
     );
   }
 
-  if (packageJsonEnabled) {
-    const packageJsonOptions: undefined | packageJson.Options =
-      typeof vpOptions?.packageJson !== "object"
+  if (tanstackQueryEnabled) {
+    const tanstackQueryOptions: undefined | tanstackQuery.Options =
+      typeof vpOptions?.tanstackQuery !== "object"
         ? undefined
-        : vpOptions.packageJson;
+        : vpOptions.tanstackQuery;
     config = config.append(
-      packageJson(...(!packageJsonOptions ? [] : [packageJsonOptions])),
+      tanstackQuery(...(!tanstackQueryOptions ? [] : [tanstackQueryOptions])),
     );
   }
 

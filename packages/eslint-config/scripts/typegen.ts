@@ -11,6 +11,7 @@ import { mdx } from "../src/configs/mdx";
 import { prettier } from "../src/configs/prettier";
 import { reactCompiler } from "../src/configs/reactCompiler";
 import { storybook } from "../src/configs/storybook";
+import { tanstackQuery } from "../src/configs/tanstackQuery";
 import { imports } from "../src/extends/imports";
 import { javascript } from "../src/extends/javascript";
 import { jsonc } from "../src/extends/jsonc";
@@ -35,6 +36,7 @@ import { yaml } from "../src/extends/yaml";
 
   const configs = await combine(
     emotion(),
+    tanstackQuery(),
     mdx(),
     prettier(),
     reactCompiler(),

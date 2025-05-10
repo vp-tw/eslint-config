@@ -4,8 +4,10 @@
   "private": true,
   "description": "Test React lint rules",
   "dependencies": {
+    "@emotion/css": "catalog:",
     "@storybook/preview-api": "catalog:",
     "@storybook/react": "catalog:",
+    "@tanstack/react-query": "catalog:",
     "@types/react": "catalog:"
   }
 }

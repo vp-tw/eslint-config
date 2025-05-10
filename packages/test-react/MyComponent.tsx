@@ -1,3 +1,7 @@
+import { css, cx } from "@emotion/css";
+import { useQuery } from "@tanstack/react-query";
+
+import path from "pathe";
 import {
   useEffect,
   // eslint-disable-next-line perfectionist/sort-named-imports -- `perfectionist` should validate this.
@@ -7,13 +11,6 @@ import {
 } from "react";
 // eslint-disable-next-line import/no-namespace -- `import/no-namespace` should validate this.
 import * as React from "react";
-// eslint-disable-next-line perfectionist/sort-imports -- `perfectionist` should validate this.
-import path from "pathe";
-
-/**
- * Emotion simulation.
- */
-const css = (..._args: Array<any>): any => "fake className";
 
 // eslint-disable-next-line @emotion/syntax-preference -- Styles should be written using objects.
 const emotionWithStringShouldBeInvalid = css`
@@ -53,19 +50,27 @@ const MyComponent: React.FC<MyComponent.Props> = (props) => {
   const [_unusedState] = useState(0);
   const ref = useRef(null);
   noop(ref.current);
+
+  // eslint-disable-next-line @tanstack/query/no-rest-destructuring -- `@tanstack/query` should validate this.
+  const { data, ...rest } = useQuery({
+    queryKey: ["todos"],
+    queryFn: noop,
+  });
+
   useEffect(() => {
     // eslint-disable-next-line no-console -- `no-console` should validate this.
-    console.log(props.foo);
+    console.log({ props, data, rest });
     // eslint-disable-next-line react-compiler/react-compiler -- `react-compiler` should validate this.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- `react-hooks` should validate this.
   }, []);
+
   return (
     <div
       onClick={onClick}
-      className={[
+      className={cx(
         emotionWithObjectShouldBeValid,
         emotionWithStringShouldBeInvalid,
-      ].join(" ")}
+      )}
     >
       Test
       {/* eslint-disable-next-line react-dom/no-unsafe-target-blank -- `react-dom` should validate this. */}

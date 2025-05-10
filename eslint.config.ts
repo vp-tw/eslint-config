@@ -10,11 +10,12 @@ const prettierignorePath = path.resolve(__dirname, ".prettierignore");
 
 export default vdustr(
   {
-    emotion: true,
     react: true,
     svelte: true,
-    storybook: true,
+    emotion: true,
+    tanstackQuery: true,
     mdx: true,
+    storybook: true,
   },
   includeIgnoreFile(prettierignorePath),
 );

@@ -36,6 +36,7 @@
     "@emotion/eslint-plugin": "catalog:",
     "@eslint-react/eslint-plugin": "catalog:",
     "@eslint/compat": "catalog:",
+    "@tanstack/eslint-plugin-query": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
     "@types/fs-extra": "catalog:",
     "@types/lint-staged": "catalog:",
