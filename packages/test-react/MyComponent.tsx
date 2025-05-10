@@ -10,6 +10,21 @@ import * as React from "react";
 // eslint-disable-next-line perfectionist/sort-imports -- `perfectionist` should validate this.
 import path from "pathe";
 
+/**
+ * Emotion simulation.
+ */
+const css = (..._args: Array<any>): any => "fake className";
+
+// eslint-disable-next-line @emotion/syntax-preference -- Styles should be written using objects.
+const emotionWithStringShouldBeInvalid = css`
+  color: red;
+`;
+
+// Styles should be written using objects.
+const emotionWithObjectShouldBeValid = css({
+  color: "red",
+});
+
 // eslint-disable-next-line ts/array-type -- `ts` should validate this.
 const a: string[] = ["Hello", "world!"];
 const b: Array<string> = ["Hello", "world!"];
@@ -45,7 +60,13 @@ const MyComponent: React.FC<MyComponent.Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- `react-hooks` should validate this.
   }, []);
   return (
-    <div onClick={onClick}>
+    <div
+      onClick={onClick}
+      className={[
+        emotionWithObjectShouldBeValid,
+        emotionWithStringShouldBeInvalid,
+      ].join(" ")}
+    >
       Test
       {/* eslint-disable-next-line react-dom/no-unsafe-target-blank -- `react-dom` should validate this. */}
       <a target="_blank" href="https://example.com">

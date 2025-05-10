@@ -10,6 +10,7 @@ import type {
 } from "./types";
 import antfu from "@antfu/eslint-config";
 import { omit, pick } from "es-toolkit";
+import { emotion } from "./configs/emotion";
 import { mdx } from "./configs/mdx";
 import { packageJson } from "./configs/packageJson";
 import { prettier } from "./configs/prettier";
@@ -43,6 +44,7 @@ type Options = ReplaceAntfuEslintRulesWithVpRulesDeeply<
   mdx?: boolean | mdx.Options;
   storybook?: boolean | storybook.Options;
   prettier?: boolean | prettier.Options;
+  emotion?: boolean | emotion.Options;
 };
 
 const ownedConfigNames = [
@@ -51,6 +53,7 @@ const ownedConfigNames = [
   "mdx",
   "storybook",
   "prettier",
+  "emotion",
 ] as const satisfies Array<keyof Options>;
 
 const vdustr = (
@@ -69,6 +72,7 @@ const vdustr = (
   const storybookEnabled: boolean = Boolean(vpOptions?.storybook ?? false);
   const mdxEnabled: boolean = Boolean(vpOptions?.mdx ?? false);
   const prettierEnabled: boolean = Boolean(vpOptions?.prettier ?? true);
+  const emotionEnabled: boolean = Boolean(vpOptions?.emotion ?? false);
 
   let config: VpComposer = antfu({
     ...antfuOptions,
@@ -91,6 +95,14 @@ const vdustr = (
   sortJsonArrayValues(config, vpOptions?.extends?.sort?.jsoncSortArrayValues);
   yaml(config, vpOptions?.extends?.yaml);
   react(config, vpOptions?.extends?.react);
+
+  if (emotionEnabled) {
+    const emotionOptions: undefined | emotion.Options =
+      typeof vpOptions?.emotion !== "object" ? undefined : vpOptions.emotion;
+    config = config.append(
+      emotion(...(!emotionOptions ? [] : [emotionOptions])),
+    );
+  }
 
   if (packageJsonEnabled) {
     const packageJsonOptions: undefined | packageJson.Options =

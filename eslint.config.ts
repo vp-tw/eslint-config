@@ -10,6 +10,7 @@ const prettierignorePath = path.resolve(__dirname, ".prettierignore");
 
 export default vdustr(
   {
+    emotion: true,
     react: true,
     svelte: true,
     storybook: true,

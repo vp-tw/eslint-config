@@ -6,6 +6,7 @@ import { flatConfigsToRulesDTS } from "eslint-typegen/core";
 import fs from "fs-extra";
 import path from "pathe";
 import { packageDirectory } from "pkg-dir";
+import { emotion } from "../src/configs/emotion";
 import { mdx } from "../src/configs/mdx";
 import { prettier } from "../src/configs/prettier";
 import { reactCompiler } from "../src/configs/reactCompiler";
@@ -33,6 +34,7 @@ import { yaml } from "../src/extends/yaml";
   await fs.ensureDir(path.dirname(targetPath));
 
   const configs = await combine(
+    emotion(),
     mdx(),
     prettier(),
     reactCompiler(),

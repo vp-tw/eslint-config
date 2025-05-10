@@ -57,6 +57,7 @@
   },
   "peerDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@emotion/eslint-plugin": "catalog:",
     "@types/eslint-config-prettier": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
@@ -67,6 +68,9 @@
     "eslint-plugin-yml": "catalog:"
   },
   "peerDependenciesMeta": {
+    "@emotion/eslint-plugin": {
+      "optional": true
+    },
     "@types/eslint-config-prettier": {
       "optional": true
     },
