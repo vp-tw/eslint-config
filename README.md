@@ -4,11 +4,13 @@ ViPro's ESLint configuration.
 
 - Built on top of [antfu/eslint-config](https://github.com/antfu/eslint-config).
 - Integrates with:
-  - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
-  - [eslint-mdx](https://github.com/mdx-js/eslint-mdx)
-  - [eslint-plugin-storybook](https://github.com/storybookjs/eslint-plugin-storybook)
   - [eslint-plugin-react-compiler](https://www.npmjs.com/package/eslint-plugin-react-compiler)
   - [eslint-plugin-package-json](https://github.com/JoshuaKGoldberg/eslint-plugin-package-json)
+  - [@emotion/eslint-plugin](https://www.npmjs.com/package/@emotion/eslint-plugin)
+  - [@tanstack/eslint-plugin-query](https://www.npmjs.com/package/@tanstack/eslint-plugin-query)
+  - [eslint-mdx](https://github.com/mdx-js/eslint-mdx)
+  - [eslint-plugin-storybook](https://github.com/storybookjs/eslint-plugin-storybook)
+  - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
 - Fine-tuned to provide an opinionated, optimal DX. Please copy the VSCode settings from [eslint-config.code-workspace](https://github.com/VdustR/eslint-config/blob/main/eslint-config.code-workspace).
 
 Check [here](https://vdustr.dev/eslint-config) to preview the ESLint inspection.
@@ -38,9 +40,15 @@ const prettierignorePath = path.resolve(__dirname, ".prettierignore");
 export default vdustr(
   {
     // By default, we disable `stylistic` and use `prettier` instead.
-    // stylistic: true,
-    storybook: true,
-    mdx: true,
+    // stylistic: false,
+
+    // Defaults
+    packageJson: true,
+    emotion: false,
+    tanstackQuery: false,
+    mdx: false,
+    storybook: false,
+    prettier: true,
   },
   includeIgnoreFile(prettierignorePath),
 );
