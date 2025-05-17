@@ -2346,10 +2346,10 @@
             ".svelte"
           ],
           "parser": {
-            "version": "8.32.0",
+            "version": "8.32.1",
             "meta": {
               "name": "typescript-eslint/parser",
-              "version": "8.32.0"
+              "version": "8.32.1"
             }
           }
         }
@@ -13446,7 +13446,6 @@
         "requiresTypeChecking": true,
         "url": "https://typescript-eslint.io/rules/no-unnecessary-type-conversion"
       },
-      "fixable": "code",
       "hasSuggestions": true,
       "name": "ts/no-unnecessary-type-conversion",
       "plugin": "ts"
@@ -21370,7 +21369,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1746884298040,
+    "lastUpdate": 1747447677730,
     "basePath": "",
     "configPath": ""
   }
