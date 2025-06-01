@@ -5,6 +5,7 @@
   "description": "Root package.json for monorepo",
   "type": "module",
   "scripts": {
+    "changeset": "changeset",
     "commit": "cz",
     "inspect": "eslint-config-inspector",
     "lint": "run-p lint:*",
@@ -12,17 +13,15 @@
     "lint:es": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
     "lint:prettier": "prettier --ignore-unknown --write .",
     "prepare": "husky",
+    "release": "changeset publish",
     "test": "vitest",
-    "v:major": "lerna version -y major",
-    "v:minor": "lerna version -y minor",
-    "v:patch": "lerna version -y patch"
+    "version-packages": "changeset version"
   },
   "dependencies": {
     "@eslint/config-inspector": "catalog:",
     "es-toolkit": "catalog:",
     "eslint-plugin-react-hooks": "catalog:",
     "eslint-plugin-react-refresh": "catalog:",
-    "lerna": "catalog:",
     "local-pkg": "catalog:",
     "npm-run-all": "catalog:",
     "svelte": "catalog:",
@@ -30,6 +29,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@changesets/cli": "catalog:",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@commitlint/types": "catalog:",
@@ -59,10 +59,11 @@
     "pathe": "catalog:",
     "pkg-dir": "catalog:",
     "prettier": "catalog:",
+    "storybook": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },
-  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
+  "packageManager": "pnpm@10.11.0",
   "engines": {
     "node": ">=23",
     "pnpm": ">=9"
