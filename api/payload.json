@@ -20586,16 +20586,6 @@
   },
   "files": [
     {
-      "filepath": ".changeset/clear-things-strive.md",
-      "globs": [
-        "**/*.md"
-      ],
-      "configs": [
-        51,
-        52
-      ]
-    },
-    {
       "filepath": ".changeset/config.json",
       "globs": [
         "**/*.json"
@@ -21591,7 +21581,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1748763406012,
+    "lastUpdate": 1748763493064,
     "basePath": "",
     "configPath": ""
   }
