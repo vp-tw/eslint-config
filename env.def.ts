@@ -2,7 +2,7 @@ declare module "process" {
   global {
     namespace NodeJS {
       interface ProcessEnv {
-        TYPE?: NodeJS.ProcessEnv[string];
+        LINT_STAGED_TYPE?: NodeJS.ProcessEnv[string];
       }
     }
   }

@@ -70,8 +70,8 @@ catalogs:
       specifier: ^19.1.6
       version: 19.1.6
     '@vp-tw/tsconfig':
-      specifier: ^3.0.0
-      version: 3.0.0
+      specifier: ^3.1.2
+      version: 3.1.2
     commitizen:
       specifier: ^4.3.1
       version: 4.3.1
@@ -236,7 +236,7 @@ importers:
         version: 13.3.0
       '@vp-tw/tsconfig':
         specifier: 'catalog:'
-        version: 3.0.0
+        version: 3.1.2
       commitizen:
         specifier: 'catalog:'
         version: 4.3.1(@types/node@22.15.18)(typescript@5.8.3)
@@ -1714,8 +1714,8 @@ packages:
   '@tsconfig/node-ts@23.6.1':
     resolution: {integrity: sha512-1E5cUp+S65pLKKI9VrGMQPWDHxOEq3dAGM2onG3fLeSRwWbylYFwhIjnzJikjSN7w2nCgwxmv8ifvUKDFkK38Q==}
 
-  '@tsconfig/node23@23.0.1':
-    resolution: {integrity: sha512-oJ0Y42TmsBLuLAfEbPTS5JXSbJJEEU4bULROS6zsL54Gdlw5aOy27rpsquotMKGf2auP6rkbfYsjl43WdGrNcg==}
+  '@tsconfig/node23@23.0.2':
+    resolution: {integrity: sha512-vOs+KHadhOfNs80TDwy9qXtwFgD5SJ37AkeSMsWmllZ96FaNcfB2S3bkmMHuG8jLjpezXCOO2+4KtNIFk2Xs+A==}
 
   '@tsconfig/strictest@2.0.5':
     resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
@@ -1723,8 +1723,8 @@ packages:
   '@tsconfig/svelte@5.0.4':
     resolution: {integrity: sha512-BV9NplVgLmSi4mwKzD8BD/NQ8erOY/nUE/GpgWe2ckx+wIQF5RyRirn/QsSSCPeulVpc3RA/iJt6DpfTIZps0Q==}
 
-  '@tsconfig/vite-react@3.4.0':
-    resolution: {integrity: sha512-NxS7WJayciLI+UnCgEqdBfQrZebvVNTSEj5EnaitwThL7iAso5G8wx18B/6yypCFGnyu8p6IMpKWu6JklOX3KA==}
+  '@tsconfig/vite-react@6.3.5':
+    resolution: {integrity: sha512-1JDbtNCgexy5HuQdBkFHv38u5j79XWI1KWs6Jxwnm9i2rD1IPWyzlPqh4vgsAiRu1Zy1d26wxxSJYVqGaDJ+PQ==}
 
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
@@ -2020,8 +2020,8 @@ packages:
   '@vitest/utils@3.1.4':
     resolution: {integrity: sha512-yriMuO1cfFhmiGc8ataN51+9ooHRuURdfAZfwFd3usWynjzpLslZdYnRegTv32qdgtJTsj15FoeZe2g15fY1gg==}
 
-  '@vp-tw/tsconfig@3.0.0':
-    resolution: {integrity: sha512-PcXNQKuSXkrcMiAUX7nj4lzzieofUvWY0rJsyI7xyH4QvzK2sWRe8RoSfn/Y49Mofaa5mhDFBam0NUO5bA9FKg==}
+  '@vp-tw/tsconfig@3.1.2':
+    resolution: {integrity: sha512-P2gO2S1n9YOd0kZWFvJWgKn76jS4Weyp4vwc8W+/ByMfS7vOFsPKmHj56akze2W+8nQVoRHaV91ugRt7bLjqWg==}
 
   '@vue/compiler-core@3.5.13':
     resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==}
@@ -7268,13 +7268,13 @@ snapshots:
 
   '@tsconfig/node-ts@23.6.1': {}
 
-  '@tsconfig/node23@23.0.1': {}
+  '@tsconfig/node23@23.0.2': {}
 
   '@tsconfig/strictest@2.0.5': {}
 
   '@tsconfig/svelte@5.0.4': {}
 
-  '@tsconfig/vite-react@3.4.0': {}
+  '@tsconfig/vite-react@6.3.5': {}
 
   '@tybys/wasm-util@0.9.0':
     dependencies:
@@ -7598,13 +7598,13 @@ snapshots:
       loupe: 3.1.3
       tinyrainbow: 2.0.0
 
-  '@vp-tw/tsconfig@3.0.0':
+  '@vp-tw/tsconfig@3.1.2':
     dependencies:
       '@tsconfig/node-lts': 22.0.1
       '@tsconfig/node-ts': 23.6.1
-      '@tsconfig/node23': 23.0.1
+      '@tsconfig/node23': 23.0.2
       '@tsconfig/strictest': 2.0.5
-      '@tsconfig/vite-react': 3.4.0
+      '@tsconfig/vite-react': 6.3.5
 
   '@vue/compiler-core@3.5.13':
     dependencies:
