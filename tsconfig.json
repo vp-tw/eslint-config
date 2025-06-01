@@ -1,4 +1,12 @@
 {
-  "extends": ["@vp-tw/tsconfig/base/bundler/tsconfig"],
-  "include": ["./*.js", "./*.ts"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./packages/eslint-config/tsconfig.lib.json" },
+    { "path": "./packages/eslint-config/tsconfig.node.json" },
+    { "path": "./packages/test-svelte/tsconfig.app.json" },
+    { "path": "./packages/test-jsonc/tsconfig.node.json" },
+    { "path": "./packages/test-react/tsconfig.app.json" },
+    { "path": "./packages/test-js/tsconfig.node.json" }
+  ]
 }

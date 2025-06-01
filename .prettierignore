@@ -3,3 +3,5 @@
 dist
 /packages/eslint-config/src/eslint-typegen.d.ts
 /.eslint-config-inspector
+/.changeset
+CHANGELOG.md

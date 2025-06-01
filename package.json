@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "changeset": "changeset",
+    "checkTypes": "tsc -b --noEmit",
     "commit": "cz",
     "inspect": "eslint-config-inspector",
     "lint": "run-p lint:*",
