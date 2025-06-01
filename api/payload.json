@@ -90,6 +90,9 @@
         "**/.cache/",
         ".vuepress/dist",
         "**/.temp",
+        "**/.cache",
+        "**/.vitepress/dist",
+        "**/.vitepress/cache",
         "**/.docusaurus",
         "**/.serverless/",
         "**/.fusebox/",
@@ -101,8 +104,6 @@
         ".yarn/build-state.yml",
         ".yarn/install-state.gz",
         "**/.pnp.*",
-        "**/.webpack/",
-        "**/.svelte-kit",
         "packages/eslint-config/src/eslint-typegen.d.ts",
         "packages/eslint-config/README.md",
         "packages/eslint-config/LICENSE",
@@ -3078,6 +3079,7 @@
         "package-json/order-properties": "error",
         "package-json/require-description": "error",
         "package-json/require-name": "error",
+        "package-json/require-type": "error",
         "package-json/require-version": "error",
         "package-json/repository-shorthand": "error",
         "package-json/sort-collections": "error",
@@ -3126,7 +3128,8 @@
         "@tanstack/query/stable-query-client": "error",
         "@tanstack/query/no-unstable-deps": "error",
         "@tanstack/query/infinite-query-property-order": "error",
-        "@tanstack/query/no-void-query-fn": "error"
+        "@tanstack/query/no-void-query-fn": "error",
+        "@tanstack/query/mutation-property-order": "error"
       },
       "index": 65
     },
@@ -4357,11 +4360,17 @@
       "plugin": "eslint"
     },
     "func-style": {
+      "dialects": [
+        "javascript",
+        "typescript"
+      ],
+      "language": "javascript",
       "type": "suggestion",
       "defaultOptions": [
         "expression",
         {
           "allowArrowFunctions": false,
+          "allowTypeAnnotation": false,
           "overrides": {}
         }
       ],
@@ -5089,6 +5098,11 @@
     },
     "max-params": {
       "type": "suggestion",
+      "dialects": [
+        "typescript",
+        "javascript"
+      ],
+      "language": "javascript",
       "docs": {
         "description": "Enforce a maximum number of parameters in function definitions",
         "recommended": false,
@@ -5376,6 +5390,7 @@
         "recommended": false,
         "url": "https://eslint.org/docs/latest/rules/no-array-constructor"
       },
+      "fixable": "code",
       "hasSuggestions": true,
       "name": "no-array-constructor",
       "plugin": "eslint"
@@ -6281,6 +6296,11 @@
     },
     "no-magic-numbers": {
       "type": "suggestion",
+      "dialects": [
+        "typescript",
+        "javascript"
+      ],
+      "language": "javascript",
       "docs": {
         "description": "Disallow magic numbers",
         "recommended": false,
@@ -7065,12 +7085,19 @@
     },
     "no-shadow": {
       "type": "suggestion",
+      "dialects": [
+        "typescript",
+        "javascript"
+      ],
+      "language": "javascript",
       "defaultOptions": [
         {
           "allow": [],
           "builtinGlobals": false,
           "hoist": "functions",
-          "ignoreOnInitialization": false
+          "ignoreOnInitialization": false,
+          "ignoreTypeValueShadow": true,
+          "ignoreFunctionTypeParameterNameValueShadow": true
         }
       ],
       "docs": {
@@ -7266,6 +7293,21 @@
       },
       "fixable": "whitespace",
       "name": "no-trailing-spaces",
+      "plugin": "eslint"
+    },
+    "no-unassigned-vars": {
+      "type": "problem",
+      "dialects": [
+        "typescript",
+        "javascript"
+      ],
+      "language": "javascript",
+      "docs": {
+        "description": "Disallow `let` or `var` variables that are read but never assigned",
+        "recommended": false,
+        "url": "https://eslint.org/docs/latest/rules/no-unassigned-vars"
+      },
+      "name": "no-unassigned-vars",
       "plugin": "eslint"
     },
     "no-undef": {
@@ -7503,7 +7545,10 @@
           "classes": true,
           "functions": true,
           "variables": true,
-          "allowNamedExports": false
+          "allowNamedExports": false,
+          "enums": true,
+          "typedefs": true,
+          "ignoreTypeReferences": true
         }
       ],
       "name": "no-use-before-define",
@@ -7595,6 +7640,11 @@
     },
     "no-useless-escape": {
       "type": "suggestion",
+      "defaultOptions": [
+        {
+          "allowRegexCharacters": []
+        }
+      ],
       "docs": {
         "description": "Disallow unnecessary escape characters",
         "recommended": true,
@@ -8011,6 +8061,11 @@
     },
     "prefer-arrow-callback": {
       "type": "suggestion",
+      "dialects": [
+        "javascript",
+        "typescript"
+      ],
+      "language": "javascript",
       "defaultOptions": [
         {
           "allowNamedFunctions": false,
@@ -10218,7 +10273,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Ensure imports point to a file/module that can be resolved.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-unresolved.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-unresolved.md"
       },
       "name": "import/no-unresolved",
       "plugin": "import"
@@ -10228,7 +10283,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Ensure named imports correspond to a named export in the remote file.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/named.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/named.md"
       },
       "name": "import/named",
       "plugin": "import"
@@ -10238,7 +10293,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Ensure a default export is present, given a default import.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/default.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/default.md"
       },
       "name": "import/default",
       "plugin": "import"
@@ -10248,7 +10303,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Ensure imported namespaces contain dereferenced properties as they are dereferenced.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/namespace.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/namespace.md"
       },
       "name": "import/namespace",
       "plugin": "import"
@@ -10258,7 +10313,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid namespace (a.k.a. \"wildcard\" `*`) imports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-namespace.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-namespace.md"
       },
       "fixable": "code",
       "name": "import/no-namespace",
@@ -10269,7 +10324,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid any invalid exports, i.e. re-export of the same name.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/export.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/export.md"
       },
       "name": "import/export",
       "plugin": "import"
@@ -10279,7 +10334,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid the use of mutable exports with `var` or `let`.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-mutable-exports.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-mutable-exports.md"
       },
       "name": "import/no-mutable-exports",
       "plugin": "import"
@@ -10289,8 +10344,10 @@
       "docs": {
         "category": "Style guide",
         "description": "Ensure consistent use of file extension within the import path.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/extensions.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/extensions.md"
       },
+      "fixable": "code",
+      "hasSuggestions": true,
       "name": "import/extensions",
       "plugin": "import"
     },
@@ -10299,7 +10356,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Enforce which files can be imported in a given folder.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-restricted-paths.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-restricted-paths.md"
       },
       "name": "import/no-restricted-paths",
       "plugin": "import"
@@ -10309,7 +10366,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid importing the submodules of other modules.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-internal-modules.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-internal-modules.md"
       },
       "name": "import/no-internal-modules",
       "plugin": "import"
@@ -10319,7 +10376,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Prefer named exports to be grouped together in a single export declaration.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/group-exports.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/group-exports.md"
       },
       "name": "import/group-exports",
       "plugin": "import"
@@ -10329,7 +10386,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid importing packages through relative paths.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-relative-packages.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-relative-packages.md"
       },
       "fixable": "code",
       "name": "import/no-relative-packages",
@@ -10340,7 +10397,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid importing modules from parent directories.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-relative-parent-imports.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-relative-parent-imports.md"
       },
       "name": "import/no-relative-parent-imports",
       "plugin": "import"
@@ -10350,7 +10407,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Enforce or ban the use of inline type-only markers for named imports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/consistent-type-specifier-style.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/consistent-type-specifier-style.md"
       },
       "fixable": "code",
       "name": "import/consistent-type-specifier-style",
@@ -10362,7 +10419,7 @@
         "category": "Static analysis",
         "description": "Forbid a module from importing itself.",
         "recommended": true,
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-self-import.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-self-import.md"
       },
       "name": "import/no-self-import",
       "plugin": "import"
@@ -10372,7 +10429,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid a module from importing a module with a dependency path back to itself.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-cycle.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-cycle.md"
       },
       "name": "import/no-cycle",
       "plugin": "import"
@@ -10382,7 +10439,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid named default exports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-named-default.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-named-default.md"
       },
       "name": "import/no-named-default",
       "plugin": "import"
@@ -10392,7 +10449,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid use of exported name as identifier of default export.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-named-as-default.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-named-as-default.md"
       },
       "name": "import/no-named-as-default",
       "plugin": "import"
@@ -10402,7 +10459,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid use of exported name as property of default export.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-named-as-default-member.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-named-as-default-member.md"
       },
       "name": "import/no-named-as-default-member",
       "plugin": "import"
@@ -10412,7 +10469,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid anonymous values as default exports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-anonymous-default-export.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-anonymous-default-export.md"
       },
       "name": "import/no-anonymous-default-export",
       "plugin": "import"
@@ -10422,7 +10479,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid importing a default export by a different name.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-rename-default.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-rename-default.md"
       },
       "name": "import/no-rename-default",
       "plugin": "import"
@@ -10432,7 +10489,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid modules without exports, or exports without matching import in another module.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-unused-modules.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-unused-modules.md"
       },
       "name": "import/no-unused-modules",
       "plugin": "import"
@@ -10442,7 +10499,7 @@
       "docs": {
         "category": "Module systems",
         "description": "Forbid CommonJS `require` calls and `module.exports` or `exports.*`.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-commonjs.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-commonjs.md"
       },
       "name": "import/no-commonjs",
       "plugin": "import"
@@ -10452,7 +10509,7 @@
       "docs": {
         "category": "Module systems",
         "description": "Forbid AMD `require` and `define` calls.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-amd.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-amd.md"
       },
       "name": "import/no-amd",
       "plugin": "import"
@@ -10462,7 +10519,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid repeated import of the same module in multiple places.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-duplicates.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-duplicates.md"
       },
       "fixable": "code",
       "name": "import/no-duplicates",
@@ -10473,7 +10530,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Ensure all imports appear before other statements.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/first.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/first.md"
       },
       "fixable": "code",
       "name": "import/first",
@@ -10484,7 +10541,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Enforce the maximum number of dependencies a module can have.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/max-dependencies.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/max-dependencies.md"
       },
       "name": "import/max-dependencies",
       "plugin": "import"
@@ -10494,7 +10551,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid the use of extraneous packages.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-extraneous-dependencies.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-extraneous-dependencies.md"
       },
       "name": "import/no-extraneous-dependencies",
       "plugin": "import"
@@ -10504,7 +10561,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid import of modules using absolute paths.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-absolute-path.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-absolute-path.md"
       },
       "fixable": "code",
       "name": "import/no-absolute-path",
@@ -10515,7 +10572,7 @@
       "docs": {
         "category": "Module systems",
         "description": "Forbid Node.js builtin modules.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-nodejs-modules.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-nodejs-modules.md"
       },
       "name": "import/no-nodejs-modules",
       "plugin": "import"
@@ -10525,7 +10582,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid webpack loader syntax in imports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-webpack-loader-syntax.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-webpack-loader-syntax.md"
       },
       "name": "import/no-webpack-loader-syntax",
       "plugin": "import"
@@ -10535,7 +10592,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Enforce a convention in module import order.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/order.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/order.md"
       },
       "fixable": "code",
       "name": "import/order",
@@ -10546,7 +10603,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Enforce a newline after import statements.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/newline-after-import.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/newline-after-import.md"
       },
       "fixable": "whitespace",
       "name": "import/newline-after-import",
@@ -10557,7 +10614,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Prefer a default export if module exports a single name or multiple names.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/prefer-default-export.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/prefer-default-export.md"
       },
       "name": "import/prefer-default-export",
       "plugin": "import"
@@ -10567,7 +10624,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid default exports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-default-export.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-default-export.md"
       },
       "name": "import/no-default-export",
       "plugin": "import"
@@ -10577,7 +10634,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid named exports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-named-export.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-named-export.md"
       },
       "name": "import/no-named-export",
       "plugin": "import"
@@ -10587,7 +10644,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid `require()` calls with expressions.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-dynamic-require.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-dynamic-require.md"
       },
       "name": "import/no-dynamic-require",
       "plugin": "import"
@@ -10597,7 +10654,7 @@
       "docs": {
         "category": "Module systems",
         "description": "Forbid potentially ambiguous parse goal (`script` vs. `module`).",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/unambiguous.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/unambiguous.md"
       },
       "name": "import/unambiguous",
       "plugin": "import"
@@ -10607,7 +10664,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Forbid unassigned imports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-unassigned-import.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-unassigned-import.md"
       },
       "name": "import/no-unassigned-import",
       "plugin": "import"
@@ -10617,7 +10674,7 @@
       "docs": {
         "category": "Static analysis",
         "description": "Forbid unnecessary path segments in import and require statements.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-useless-path-segments.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-useless-path-segments.md"
       },
       "fixable": "code",
       "name": "import/no-useless-path-segments",
@@ -10628,7 +10685,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Enforce a leading comment with the webpackChunkName for dynamic imports.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/dynamic-import-chunkname.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/dynamic-import-chunkname.md"
       },
       "hasSuggestions": true,
       "name": "import/dynamic-import-chunkname",
@@ -10640,7 +10697,7 @@
         "category": "Module systems",
         "description": "Forbid import statements with CommonJS module.exports.",
         "recommended": true,
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-import-module-exports.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-import-module-exports.md"
       },
       "fixable": "code",
       "name": "import/no-import-module-exports",
@@ -10651,7 +10708,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid empty named import blocks.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-empty-named-blocks.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-empty-named-blocks.md"
       },
       "fixable": "code",
       "hasSuggestions": true,
@@ -10663,7 +10720,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Ensure all exports appear after other statements.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/exports-last.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/exports-last.md"
       },
       "name": "import/exports-last",
       "plugin": "import"
@@ -10673,7 +10730,7 @@
       "docs": {
         "category": "Helpful warnings",
         "description": "Forbid imported names marked with `@deprecated` documentation tag.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/no-deprecated.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/no-deprecated.md"
       },
       "name": "import/no-deprecated",
       "plugin": "import"
@@ -10683,7 +10740,7 @@
       "docs": {
         "category": "Style guide",
         "description": "Replaced by `import-x/first`.",
-        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.1/docs/rules/imports-first.md"
+        "url": "https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.0/docs/rules/imports-first.md"
       },
       "fixable": "code",
       "deprecated": true,
@@ -17248,6 +17305,27 @@
       "name": "svelte/mustache-spacing",
       "plugin": "svelte"
     },
+    "svelte/no-add-event-listener": {
+      "docs": {
+        "description": "Warns against the use of `addEventListener`",
+        "category": "Best Practices",
+        "recommended": false,
+        "url": "https://sveltejs.github.io/eslint-plugin-svelte/rules/no-add-event-listener/",
+        "ruleId": "svelte/no-add-event-listener",
+        "ruleName": "no-add-event-listener"
+      },
+      "hasSuggestions": true,
+      "type": "suggestion",
+      "conditions": [
+        {
+          "svelteVersions": [
+            "5"
+          ]
+        }
+      ],
+      "name": "svelte/no-add-event-listener",
+      "plugin": "svelte"
+    },
     "svelte/no-at-debug-tags": {
       "docs": {
         "description": "disallow the use of `{@debug}`",
@@ -17722,6 +17800,27 @@
       "name": "svelte/no-target-blank",
       "plugin": "svelte"
     },
+    "svelte/no-top-level-browser-globals": {
+      "docs": {
+        "description": "disallow using top-level browser global variables",
+        "category": "Possible Errors",
+        "recommended": false,
+        "url": "https://sveltejs.github.io/eslint-plugin-svelte/rules/no-top-level-browser-globals/",
+        "ruleId": "svelte/no-top-level-browser-globals",
+        "ruleName": "no-top-level-browser-globals"
+      },
+      "type": "problem",
+      "conditions": [
+        {
+          "svelteFileTypes": [
+            ".svelte",
+            ".svelte.[js|ts]"
+          ]
+        }
+      ],
+      "name": "svelte/no-top-level-browser-globals",
+      "plugin": "svelte"
+    },
     "svelte/no-trailing-spaces": {
       "type": "layout",
       "docs": {
@@ -17925,6 +18024,31 @@
       "name": "svelte/prefer-style-directive",
       "plugin": "svelte"
     },
+    "svelte/prefer-writable-derived": {
+      "docs": {
+        "description": "Prefer using writable $derived instead of $state and $effect",
+        "category": "Best Practices",
+        "recommended": true,
+        "url": "https://sveltejs.github.io/eslint-plugin-svelte/rules/prefer-writable-derived/",
+        "ruleId": "svelte/prefer-writable-derived",
+        "ruleName": "prefer-writable-derived"
+      },
+      "type": "suggestion",
+      "conditions": [
+        {
+          "svelteVersions": [
+            "5"
+          ],
+          "runes": [
+            true,
+            "undetermined"
+          ]
+        }
+      ],
+      "hasSuggestions": true,
+      "name": "svelte/prefer-writable-derived",
+      "plugin": "svelte"
+    },
     "svelte/require-each-key": {
       "docs": {
         "description": "require keyed `{#each}` block",
@@ -17956,6 +18080,30 @@
         }
       ],
       "name": "svelte/require-event-dispatcher-types",
+      "plugin": "svelte"
+    },
+    "svelte/require-event-prefix": {
+      "docs": {
+        "description": "require component event names to start with \"on\"",
+        "category": "Stylistic Issues",
+        "conflictWithPrettier": false,
+        "recommended": false,
+        "url": "https://sveltejs.github.io/eslint-plugin-svelte/rules/require-event-prefix/",
+        "ruleId": "svelte/require-event-prefix",
+        "ruleName": "require-event-prefix"
+      },
+      "type": "suggestion",
+      "conditions": [
+        {
+          "svelteVersions": [
+            "5"
+          ],
+          "svelteFileTypes": [
+            ".svelte"
+          ]
+        }
+      ],
+      "name": "svelte/require-event-prefix",
       "plugin": "svelte"
     },
     "svelte/require-optimized-style-attribute": {
@@ -18737,6 +18885,11 @@
     },
     "jsonc/no-useless-escape": {
       "type": "suggestion",
+      "defaultOptions": [
+        {
+          "allowRegexCharacters": []
+        }
+      ],
       "docs": {
         "description": "disallow unnecessary escape usage",
         "recommended": [
@@ -19885,6 +20038,15 @@
       "name": "package-json/require-name",
       "plugin": "package-json"
     },
+    "package-json/require-type": {
+      "docs": {
+        "description": "Requires the `type` property to be present.",
+        "recommended": true
+      },
+      "type": "suggestion",
+      "name": "package-json/require-type",
+      "plugin": "package-json"
+    },
     "package-json/require-types": {
       "docs": {
         "description": "Requires the `types` property to be present.",
@@ -20140,6 +20302,18 @@
       "name": "@tanstack/query/no-void-query-fn",
       "plugin": "@tanstack/query"
     },
+    "@tanstack/query/mutation-property-order": {
+      "type": "problem",
+      "docs": {
+        "description": "Ensure correct order of inference-sensitive properties in useMutation()",
+        "recommended": "error",
+        "url": "https://tanstack.com/query/latest/docs/eslint/mutation-property-order"
+      },
+      "hasSuggestions": true,
+      "fixable": "code",
+      "name": "@tanstack/query/mutation-property-order",
+      "plugin": "@tanstack/query"
+    },
     "storybook/await-interactions": {
       "severity": "error",
       "docs": {
@@ -20148,11 +20322,12 @@
           "addon-interactions",
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/await-interactions.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/await-interactions.md"
       },
       "type": "problem",
       "fixable": "code",
       "hasSuggestions": true,
+      "defaultOptions": [],
       "name": "storybook/await-interactions",
       "plugin": "storybook"
     },
@@ -20165,8 +20340,9 @@
           "recommended",
           "addon-interactions"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/context-in-play-function.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/context-in-play-function.md"
       },
+      "defaultOptions": [],
       "name": "storybook/context-in-play-function",
       "plugin": "storybook"
     },
@@ -20178,8 +20354,9 @@
         "categories": [
           "csf"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/csf-component.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/csf-component.md"
       },
+      "defaultOptions": [],
       "name": "storybook/csf-component",
       "plugin": "storybook"
     },
@@ -20192,10 +20369,11 @@
           "csf",
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/default-exports.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/default-exports.md"
       },
       "fixable": "code",
       "hasSuggestions": true,
+      "defaultOptions": [],
       "name": "storybook/default-exports",
       "plugin": "storybook"
     },
@@ -20210,8 +20388,9 @@
           "csf",
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/hierarchy-separator.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/hierarchy-separator.md"
       },
+      "defaultOptions": [],
       "name": "storybook/hierarchy-separator",
       "plugin": "storybook"
     },
@@ -20225,8 +20404,13 @@
           "recommended"
         ],
         "excludeFromConfig": true,
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/meta-inline-properties.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/meta-inline-properties.md"
       },
+      "defaultOptions": [
+        {
+          "csfVersion": 3
+        }
+      ],
       "name": "storybook/meta-inline-properties",
       "plugin": "storybook"
     },
@@ -20238,8 +20422,9 @@
         "description": "Meta should use `satisfies Meta`",
         "categories": [],
         "excludeFromConfig": true,
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/meta-satisfies-type.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/meta-satisfies-type.md"
       },
+      "defaultOptions": [],
       "name": "storybook/meta-satisfies-type",
       "plugin": "storybook"
     },
@@ -20254,9 +20439,24 @@
           "csf",
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/no-redundant-story-name.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/no-redundant-story-name.md"
       },
+      "defaultOptions": [],
       "name": "storybook/no-redundant-story-name",
+      "plugin": "storybook"
+    },
+    "storybook/no-renderer-packages": {
+      "type": "problem",
+      "severity": "error",
+      "docs": {
+        "description": "Do not import renderer packages directly in stories",
+        "categories": [
+          "recommended"
+        ],
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/no-renderer-packages.md"
+      },
+      "defaultOptions": [],
+      "name": "storybook/no-renderer-packages",
       "plugin": "storybook"
     },
     "storybook/no-stories-of": {
@@ -20267,8 +20467,9 @@
         "categories": [
           "csf-strict"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/no-stories-of.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/no-stories-of.md"
       },
+      "defaultOptions": [],
       "name": "storybook/no-stories-of",
       "plugin": "storybook"
     },
@@ -20282,8 +20483,9 @@
         "categories": [
           "csf-strict"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/no-title-property-in-meta.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/no-title-property-in-meta.md"
       },
+      "defaultOptions": [],
       "name": "storybook/no-title-property-in-meta",
       "plugin": "storybook"
     },
@@ -20295,8 +20497,14 @@
         "categories": [
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/no-uninstalled-addons.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/no-uninstalled-addons.md"
       },
+      "defaultOptions": [
+        {
+          "packageJsonLocation": "",
+          "ignore": []
+        }
+      ],
       "name": "storybook/no-uninstalled-addons",
       "plugin": "storybook"
     },
@@ -20310,8 +20518,9 @@
         "categories": [
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/prefer-pascal-case.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/prefer-pascal-case.md"
       },
+      "defaultOptions": [],
       "name": "storybook/prefer-pascal-case",
       "plugin": "storybook"
     },
@@ -20324,8 +20533,9 @@
           "recommended",
           "csf"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/story-exports.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/story-exports.md"
       },
+      "defaultOptions": [],
       "name": "storybook/story-exports",
       "plugin": "storybook"
     },
@@ -20339,8 +20549,9 @@
           "addon-interactions",
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/use-storybook-expect.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/use-storybook-expect.md"
       },
+      "defaultOptions": [],
       "name": "storybook/use-storybook-expect",
       "plugin": "storybook"
     },
@@ -20355,8 +20566,9 @@
           "addon-interactions",
           "recommended"
         ],
-        "url": "https://github.com/storybookjs/eslint-plugin-storybook/blob/main/docs/rules/use-storybook-testing-library.md"
+        "url": "https://github.com/storybookjs/storybook/blob/next/code/lib/eslint-plugin/docs/rules/use-storybook-testing-library.md"
       },
+      "defaultOptions": [],
       "name": "storybook/use-storybook-testing-library",
       "plugin": "storybook"
     },
@@ -20373,6 +20585,27 @@
     }
   },
   "files": [
+    {
+      "filepath": ".changeset/clear-things-strive.md",
+      "globs": [
+        "**/*.md"
+      ],
+      "configs": [
+        51,
+        52
+      ]
+    },
+    {
+      "filepath": ".changeset/config.json",
+      "globs": [
+        "**/*.json"
+      ],
+      "configs": [
+        35,
+        36,
+        37
+      ]
+    },
     {
       "filepath": ".github/workflows/gh-pages.yml",
       "globs": [
@@ -20485,17 +20718,6 @@
         28,
         30,
         57
-      ]
-    },
-    {
-      "filepath": "lerna.json",
-      "globs": [
-        "**/*.json"
-      ],
-      "configs": [
-        35,
-        36,
-        37
       ]
     },
     {
@@ -21369,7 +21591,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1747447677730,
+    "lastUpdate": 1748763406012,
     "basePath": "",
     "configPath": ""
   }
