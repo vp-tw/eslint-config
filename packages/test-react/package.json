@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "description": "Test React lint rules",
+  "type": "module",
   "dependencies": {
     "@emotion/css": "catalog:",
     "@storybook/preview-api": "catalog:",

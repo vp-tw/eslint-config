@@ -14,7 +14,7 @@ namespace storybook {
 const storybook = async (
   options?: storybook.Options,
 ): Promise<Array<TypedFlatConfigItem>> => {
-  await ensurePackages(["eslint-plugin-storybook"]);
+  await ensurePackages(["eslint-plugin-storybook", "storybook"]);
   const storybookPlugin = await interopDefault(
     import("eslint-plugin-storybook"),
   );

@@ -7,6 +7,7 @@
     "name": "ViPro",
     "url": "https://vdustr.dev"
   },
+  "type": "module",
   "exports": {
     ".": {
       "import": {
@@ -66,7 +67,8 @@
     "eslint-plugin-package-json": "catalog:",
     "eslint-plugin-react-compiler": "catalog:",
     "eslint-plugin-storybook": "catalog:",
-    "eslint-plugin-yml": "catalog:"
+    "eslint-plugin-yml": "catalog:",
+    "storybook": "catalog:"
   },
   "peerDependenciesMeta": {
     "@emotion/eslint-plugin": {
@@ -94,6 +96,9 @@
       "optional": true
     },
     "eslint-plugin-yml": {
+      "optional": true
+    },
+    "storybook": {
       "optional": true
     }
   },
