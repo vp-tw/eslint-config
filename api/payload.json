@@ -3604,7 +3604,9 @@
         "pnpm-lock.yaml",
         "**/dist",
         "packages/eslint-config/src/eslint-typegen.d.ts",
-        ".eslint-config-inspector"
+        ".eslint-config-inspector",
+        ".changeset",
+        "**/CHANGELOG.md"
       ],
       "index": 74
     }
@@ -20586,17 +20588,6 @@
   },
   "files": [
     {
-      "filepath": ".changeset/config.json",
-      "globs": [
-        "**/*.json"
-      ],
-      "configs": [
-        35,
-        36,
-        37
-      ]
-    },
-    {
       "filepath": ".github/workflows/gh-pages.yml",
       "globs": [
         "**/*.y?(a)ml"
@@ -21118,20 +21109,6 @@
       ]
     },
     {
-      "filepath": "packages/eslint-config/src/tsconfig.json",
-      "globs": [
-        "**/*.json",
-        "**/tsconfig.json"
-      ],
-      "configs": [
-        35,
-        36,
-        37,
-        41,
-        42
-      ]
-    },
-    {
       "filepath": "packages/eslint-config/src/types.ts",
       "globs": [
         "**/*.?([cm])ts",
@@ -21230,10 +21207,24 @@
       ]
     },
     {
-      "filepath": "packages/eslint-config/tsconfig.json",
+      "filepath": "packages/eslint-config/tsconfig.lib.json",
       "globs": [
         "**/*.json",
-        "**/tsconfig.json"
+        "**/tsconfig.*.json"
+      ],
+      "configs": [
+        35,
+        36,
+        37,
+        41,
+        42
+      ]
+    },
+    {
+      "filepath": "packages/eslint-config/tsconfig.node.json",
+      "globs": [
+        "**/*.json",
+        "**/tsconfig.*.json"
       ],
       "configs": [
         35,
@@ -21276,10 +21267,10 @@
       ]
     },
     {
-      "filepath": "packages/test-js/tsconfig.json",
+      "filepath": "packages/test-js/tsconfig.node.json",
       "globs": [
         "**/*.json",
-        "**/tsconfig.json"
+        "**/tsconfig.*.json"
       ],
       "configs": [
         35,
@@ -21343,10 +21334,10 @@
       ]
     },
     {
-      "filepath": "packages/test-jsonc/tsconfig.json",
+      "filepath": "packages/test-jsonc/tsconfig.node.json",
       "globs": [
         "**/*.json",
-        "**/tsconfig.json"
+        "**/tsconfig.*.json"
       ],
       "configs": [
         35,
@@ -21427,10 +21418,10 @@
       ]
     },
     {
-      "filepath": "packages/test-react/tsconfig.json",
+      "filepath": "packages/test-react/tsconfig.app.json",
       "globs": [
         "**/*.json",
-        "**/tsconfig.json"
+        "**/tsconfig.*.json"
       ],
       "configs": [
         35,
@@ -21483,10 +21474,10 @@
       ]
     },
     {
-      "filepath": "packages/test-svelte/tsconfig.json",
+      "filepath": "packages/test-svelte/tsconfig.app.json",
       "globs": [
         "**/*.json",
-        "**/tsconfig.json"
+        "**/tsconfig.*.json"
       ],
       "configs": [
         35,
@@ -21564,6 +21555,20 @@
       ]
     },
     {
+      "filepath": "tsconfig.node.json",
+      "globs": [
+        "**/*.json",
+        "**/tsconfig.*.json"
+      ],
+      "configs": [
+        35,
+        36,
+        37,
+        41,
+        42
+      ]
+    },
+    {
       "filepath": "vitest.workspace.ts",
       "globs": [
         "**/vitest.workspace.?([cm])[jt]s",
@@ -21581,7 +21586,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1748763493064,
+    "lastUpdate": 1748766527665,
     "basePath": "",
     "configPath": ""
   }
