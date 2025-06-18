@@ -9,7 +9,13 @@ import {
   useRef,
   useState,
 } from "react";
-// eslint-disable-next-line import/no-namespace -- `import/no-namespace` should validate this.
+
+/**
+ * `eslint-plugin-import-x` has been removed from `antfu/eslint-config`.
+ *
+ * See: [fix: remove eslint-plugin-import-x](https://github.com/antfu/eslint-config/commit/db5a31d)
+ */
+// #eslint-disable-next-line import/no-namespace -- `import/no-namespace` should validate this.
 import * as React from "react";
 
 // eslint-disable-next-line @emotion/syntax-preference -- Styles should be written using objects.
@@ -83,7 +89,12 @@ const MyComponent: React.FC<MyComponent.Props> = (props) => {
 
 const A: React.FC = () => "a";
 
-// eslint-disable-next-line import/no-default-export -- `import/no-default-export` should validate this.
+/**
+ * `eslint-plugin-import-x` has been removed from `antfu/eslint-config`.
+ *
+ * See: [fix: remove eslint-plugin-import-x](https://github.com/antfu/eslint-config/commit/db5a31d)
+ */
+// #eslint-disable-next-line import/no-default-export -- `import/no-default-export` should validate this.
 export default MyComponent;
 
 export {

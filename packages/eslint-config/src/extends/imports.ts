@@ -37,15 +37,20 @@ const imports = (composer: VpComposer, options?: imports.Options) => {
         name: "vdustr/imports/rules",
         rules: {
           /**
-           * Forbid `import {} from "module"`.
+           * `eslint-plugin-import-x` has been removed from `antfu/eslint-config`.
+           *
+           * See: [fix: remove eslint-plugin-import-x](https://github.com/antfu/eslint-config/commit/db5a31d)
            */
-          "import/no-empty-named-blocks": "error",
-
-          /**
-           * Wildcard imports can prevent tree shaking and cause name conflicts.
-           * Consider using named imports instead.
-           */
-          "import/no-namespace": "error",
+          // /**
+          //  * Forbid `import {} from "module"`.
+          //  */
+          // "import/no-empty-named-blocks": "error",
+          //
+          // /**
+          //  * Wildcard imports can prevent tree shaking and cause name conflicts.
+          //  * Consider using named imports instead.
+          //  */
+          // "import/no-namespace": "error",
         },
       },
       omittedConfig,
@@ -56,12 +61,17 @@ const imports = (composer: VpComposer, options?: imports.Options) => {
         name: "vdustr/imports/no-default-export/rules",
         rules: {
           /**
+           * `eslint-plugin-import-x` has been removed from `antfu/eslint-config`.
+           *
+           * See: [fix: remove eslint-plugin-import-x](https://github.com/antfu/eslint-config/commit/db5a31d)
+           */
+          /**
            * Enforcing named exports improves consistency, enhances
            * auto-completion and refactoring, and avoids issues with default
            * export renaming. Additionally, default exports might lead to
            * different behavior when transformed to CJS.
            */
-          "import/no-default-export": "error",
+          // "import/no-default-export": "error",
         },
         files: [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
         ignores: [
