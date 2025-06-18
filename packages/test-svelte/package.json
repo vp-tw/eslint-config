@@ -1,6 +1,6 @@
 {
   "name": "test-svelte",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Test Svelte lint rules",
   "type": "module",
