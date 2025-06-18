@@ -3,7 +3,6 @@ import type { ConfigOverrides, TypedFlatConfigItem } from "../types";
 import {
   ensurePackages,
   GLOB_MARKDOWN,
-  GLOB_MARKDOWN_CODE,
   interopDefault,
 } from "@antfu/eslint-config";
 import { omit, pick } from "es-toolkit";
@@ -64,17 +63,22 @@ const mdx = async ({
   if (codeBlocks) {
     const codeBlocksConfig = mergeConfig(
       codeBlocksOptions,
-      {
-        rules: {
-          "import/no-default-export": "off",
-        },
-        ignores: [
-          /**
-           * Handled by `@eslint/markdown`.
-           */
-          GLOB_MARKDOWN_CODE,
-        ],
-      },
+      /**
+       * `eslint-plugin-import-x` has been removed from `antfu/eslint-config`.
+       *
+       * See: [fix: remove eslint-plugin-import-x](https://github.com/antfu/eslint-config/commit/db5a31d)
+       */
+      // {
+      //   rules: {
+      //     "import/no-default-export": "off",
+      //   },
+      //   ignores: [
+      //     /**
+      //      * Handled by `@eslint/markdown`.
+      //      */
+      //     GLOB_MARKDOWN_CODE,
+      //   ],
+      // },
       {
         ...mdxPlugin.flatCodeBlocks,
         name: "vdustr/mdx/code-blocks",

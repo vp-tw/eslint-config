@@ -36,7 +36,12 @@ const storybook = async (
     {
       name: "vdustr/storybook/stories/rules",
       rules: {
-        "import/no-default-export": "off",
+        /**
+         * `eslint-plugin-import-x` has been removed from `antfu/eslint-config`.
+         *
+         * See: [fix: remove eslint-plugin-import-x](https://github.com/antfu/eslint-config/commit/db5a31d)
+         */
+        // "import/no-default-export": "off",
       },
     },
     {
