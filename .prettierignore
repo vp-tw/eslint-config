@@ -5,3 +5,4 @@ dist
 /.eslint-config-inspector
 /.changeset
 CHANGELOG.md
+LICENSE
