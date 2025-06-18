@@ -1762,17 +1762,12 @@
     },
     {
       "name": "vdustr/imports/rules",
-      "rules": {
-        "import/no-empty-named-blocks": "error",
-        "import/no-namespace": "error"
-      },
+      "rules": {},
       "index": 13
     },
     {
       "name": "vdustr/imports/no-default-export/rules",
-      "rules": {
-        "import/no-default-export": "error"
-      },
+      "rules": {},
       "files": [
         "**/*.?([cm])js",
         "**/*.?([cm])jsx",
@@ -3154,8 +3149,7 @@
         "storybook/no-redundant-story-name": "warn",
         "storybook/story-exports": "error",
         "storybook/no-stories-of": "error",
-        "storybook/no-title-property-in-meta": "error",
-        "import/no-default-export": "off"
+        "storybook/no-title-property-in-meta": "error"
       },
       "index": 67
     },
@@ -3221,15 +3215,12 @@
         "ts/no-unused-vars": "off",
         "padded-blocks": "off",
         "strict": "off",
-        "unicode-bom": "off",
-        "import/no-default-export": "off"
+        "unicode-bom": "off"
       },
       "files": [
         "**/*.{md,mdx}/**"
       ],
-      "ignores": [
-        "**/*.md/**/*.?([cm])[jt]s?(x)"
-      ],
+      "ignores": [],
       "index": 72
     },
     {
@@ -21295,7 +21286,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1750220785877,
+    "lastUpdate": 1750222592370,
     "basePath": "",
     "configPath": ""
   }
