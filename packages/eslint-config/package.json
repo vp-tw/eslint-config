@@ -43,7 +43,7 @@
     "build": "unbuild",
     "copy": "tsx scripts/copy",
     "prepare": "run-s typegen",
-    "prepublishOnly": "run-s build copy",
+    "prepublishOnly": "run-s copy build",
     "typegen": "jiti scripts/typegen"
   },
   "dependencies": {
