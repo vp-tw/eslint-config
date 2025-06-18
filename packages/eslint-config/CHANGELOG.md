@@ -1,5 +1,13 @@
 # @vp-tw/eslint-config
 
+## 0.1.5
+
+### Patch Changes
+
+- 95ac0f0: copy first then build
+
+  Fix GitHub Actions failure: [build: bump version (#12) #3 > Release](https://github.com/VdustR/eslint-config/actions/runs/15724249016/job/44310932884)
+
 ## 0.1.4
 
 ### Patch Changes
