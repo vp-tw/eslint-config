@@ -1,13 +1,16 @@
-name: GitHub Pages
+name: Release
+
 on:
   push:
     branches:
       - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,11 +34,14 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
-      - run: pnpm inspect build --base=/${{ github.event.repository.name }}/
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+
+      - name: Release
+        id: changesets
+        uses: changesets/action@v1
         with:
-          branch: gh-pages
-          folder: .eslint-config-inspector
-          clean: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          publish: pnpm release
+          title: "build: bump version"
+          commit: "build: bump version"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
