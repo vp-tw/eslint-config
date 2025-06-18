@@ -20297,6 +20297,16 @@
       ]
     },
     {
+      "filepath": ".github/workflows/release.yml",
+      "globs": [
+        "**/*.y?(a)ml"
+      ],
+      "configs": [
+        44,
+        45
+      ]
+    },
+    {
       "filepath": "README.md",
       "globs": [
         "**/*.md"
@@ -21285,7 +21295,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1750219290923,
+    "lastUpdate": 1750220785877,
     "basePath": "",
     "configPath": ""
   }
