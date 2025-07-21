@@ -1,5 +1,11 @@
 # @vp-tw/eslint-config
 
+## 0.1.6
+
+### Patch Changes
+
+- a8b5090: Update dependencies to the latest versions
+
 ## 0.1.5
 
 ### Patch Changes
