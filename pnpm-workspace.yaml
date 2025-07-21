@@ -1,18 +1,18 @@
 catalog:
-  "@antfu/eslint-config": ^4.14.1
-  "@changesets/cli": ^2.29.4
+  "@antfu/eslint-config": ^4.17.0
+  "@changesets/cli": ^2.29.5
   "@commitlint/cli": ^19.8.1
   "@commitlint/config-conventional": ^19.8.1
   "@commitlint/types": ^19.8.1
   "@emotion/css": ^11.13.5
   "@emotion/eslint-plugin": ^11.12.0
-  "@eslint/compat": ^1.3.0
+  "@eslint/compat": ^1.3.1
   "@eslint/config-inspector": ^1.1.0
-  "@eslint-react/eslint-plugin": ^1.52.2
+  "@eslint-react/eslint-plugin": ^1.52.3
   "@mui/types": ^7.4.2
   "@storybook/preview-api": ^8.6.14
   "@storybook/react": ^9.0.3
-  "@tanstack/eslint-plugin-query": ^5.78.0
+  "@tanstack/eslint-plugin-query": ^5.81.2
   "@tanstack/query-core": ^5.79.0
   "@tanstack/react-query": ^5.79.0
   "@total-typescript/ts-reset": ^0.6.1
@@ -23,18 +23,18 @@ catalog:
   "@types/react": ^19.1.6
   "@vp-tw/tsconfig": ^3.1.2
   commitizen: ^4.3.1
-  cspell: ^9.1.1
-  es-toolkit: ^1.39.3
-  eslint: ^9.29.0
-  eslint-config-prettier: ^10.1.5
+  cspell: ^9.2.0
+  es-toolkit: ^1.39.7
+  eslint: ^9.31.0
+  eslint-config-prettier: ^10.1.8
   eslint-flat-config-utils: ^2.1.0
-  eslint-plugin-mdx: ^3.5.0
-  eslint-plugin-package-json: ^0.40.0
-  eslint-plugin-react-compiler: ^19.1.0-rc.2
+  eslint-plugin-mdx: ^3.6.2
+  eslint-plugin-package-json: ^0.40.5
+  eslint-plugin-react-compiler: 19.1.0-rc.2
   eslint-plugin-react-hooks: ^5.2.0
   eslint-plugin-react-refresh: ^0.4.20
-  eslint-plugin-storybook: ^9.0.11
-  eslint-plugin-svelte: ^3.9.2
+  eslint-plugin-storybook: ^9.0.17
+  eslint-plugin-svelte: ^3.11.0
   eslint-plugin-yml: ^1.18.0
   eslint-typegen: ^2.2.0
   fast-glob: ^3.3.3
@@ -46,9 +46,9 @@ catalog:
   npm-run-all: ^4.1.5
   pathe: ^2.0.3
   pkg-dir: ^9.0.0
-  prettier: ^3.5.3
-  storybook: ^9.0.11
-  svelte: ^5.34.5
+  prettier: ^3.6.2
+  storybook: ^9.0.17
+  svelte: ^5.36.12
   tsx: ^4.20.3
   typescript: ^5.8.3
   unbuild: ^3.5.0
