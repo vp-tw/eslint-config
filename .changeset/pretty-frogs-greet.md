@@ -2,4 +2,4 @@
 "@vp-tw/eslint-config": patch
 ---
 
-up deps
+Update dependencies to the latest versions
