@@ -53,11 +53,11 @@
     "local-pkg": "catalog:"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
     "eslint-typegen": "catalog:",
     "unbuild": "catalog:"
   },
   "peerDependencies": {
-    "@antfu/eslint-config": "catalog:",
     "@emotion/eslint-plugin": "catalog:",
     "@tanstack/eslint-plugin-query": "catalog:",
     "@types/eslint-config-prettier": "catalog:",
