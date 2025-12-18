@@ -33,7 +33,7 @@ catalog:
   eslint-plugin-react-compiler: 19.1.0-rc.2
   eslint-plugin-react-hooks: ^5.2.0
   eslint-plugin-react-refresh: ^0.4.20
-  eslint-plugin-storybook: ^9.1.7
+  eslint-plugin-storybook: ^9.1.17
   eslint-plugin-svelte: ^3.12.3
   eslint-plugin-yml: ^1.18.0
   eslint-typegen: ^2.2.0
@@ -47,7 +47,7 @@ catalog:
   pathe: ^2.0.3
   pkg-dir: ^9.0.0
   prettier: ^3.6.2
-  storybook: ^9.1.7
+  storybook: ^9.1.17
   svelte: ^5.39.3
   tsx: ^4.20.5
   typescript: ^5.9.2
