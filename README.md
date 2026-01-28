@@ -10,7 +10,8 @@ ViPro's ESLint configuration.
   - [@tanstack/eslint-plugin-query](https://www.npmjs.com/package/@tanstack/eslint-plugin-query)
   - [eslint-mdx](https://github.com/mdx-js/eslint-mdx)
   - [eslint-plugin-storybook](https://github.com/storybookjs/eslint-plugin-storybook)
-  - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+  - [eslint-plugin-svelte](https://github.com/sveltejs/eslint-plugin-svelte)
+  - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) - disables formatting rules to work with any formatter (Prettier, oxfmt, etc.)
 - Fine-tuned to provide an opinionated, optimal DX. Please copy the VSCode settings from [eslint-config.code-workspace](https://github.com/VdustR/eslint-config/blob/main/eslint-config.code-workspace).
 
 Check [here](https://vdustr.dev/eslint-config) to preview the ESLint inspection.
@@ -23,7 +24,7 @@ pnpm i -D eslint @antfu/eslint-config @vp-tw/eslint-config
 
 ## Usage
 
-Simlar to [antfu/eslint-config](https://github.com/antfu/eslint-config) but with additional options:
+Similar to [antfu/eslint-config](https://github.com/antfu/eslint-config) but with additional options:
 
 ```ts
 // eslint.config.ts
@@ -42,17 +43,47 @@ export default vdustr(
     // By default, we disable `stylistic` and use `prettier` instead.
     // stylistic: false,
 
-    // Defaults
-    packageJson: true,
-    emotion: false,
-    tanstackQuery: false,
-    mdx: false,
-    storybook: false,
-    prettier: true,
+    // Options (defaults shown)
+    react: false, // Enable React support with eslint-react strict-typescript rules
+    svelte: false, // Enable Svelte support
+    packageJson: true, // Enable package.json linting
+    emotion: false, // Enable Emotion CSS-in-JS linting
+    tanstackQuery: false, // Enable TanStack Query linting
+    mdx: false, // Enable MDX linting
+    storybook: false, // Enable Storybook linting
+    prettier: true, // Enable eslint-config-prettier to disable formatting rules
+
+    // Extends options for fine-grained control
+    extends: {
+      react: {
+        typescript: true, // Use strict-typescript rules (default: true)
+      },
+    },
   },
   includeIgnoreFile(prettierignorePath),
 );
 ```
+
+## Features
+
+### React Support
+
+When `react: true`, this config uses `@eslint-react/eslint-plugin` with `strict-typescript` rules by default. You can disable TypeScript-specific rules:
+
+```ts
+export default vdustr({
+  react: true,
+  extends: {
+    react: {
+      typescript: false, // Use strict rules instead of strict-typescript
+    },
+  },
+});
+```
+
+### pnpm Workspace Sorting
+
+Automatically sorts keys in `pnpm-workspace.yaml` alphabetically using `yaml/sort-keys` rule.
 
 ## Release
 

@@ -19,6 +19,7 @@ import { tanstackQuery } from "./configs/tanstackQuery";
 import { imports } from "./extends/imports";
 import { javascript } from "./extends/javascript";
 import { jsonc } from "./extends/jsonc";
+import { pnpm } from "./extends/pnpm";
 import { react } from "./extends/react";
 import {
   sortJsonArrayValues,
@@ -40,6 +41,7 @@ type Options = ReplaceAntfuEslintRulesWithVpRulesDeeply<
     sort?: sort.Options;
     yaml?: yaml.Options;
     react?: react.Options;
+    pnpm?: pnpm.Options;
   };
   packageJson?: boolean | packageJson.Options;
   emotion?: boolean | emotion.Options;
@@ -59,10 +61,7 @@ const ownedConfigNames = [
   "prettier",
 ] as const satisfies Array<keyof Options>;
 
-const vdustr = (
-  options?: Options,
-  ...userConfigs: Array<Config>
-): VpComposer => {
+const vdustr = (options?: Options, ...userConfigs: Array<Config>): VpComposer => {
   type AntfuOptions = DistributiveOmit<OptionsConfig, keyof Options>;
   const antfuOptions: OptionsConfig = omit(
     options ?? {},
@@ -73,9 +72,7 @@ const vdustr = (
 
   const packageJsonEnabled: boolean = Boolean(vpOptions?.packageJson ?? true);
   const emotionEnabled: boolean = Boolean(vpOptions?.emotion ?? false);
-  const tanstackQueryEnabled: boolean = Boolean(
-    vpOptions?.tanstackQuery ?? false,
-  );
+  const tanstackQueryEnabled: boolean = Boolean(vpOptions?.tanstackQuery ?? false);
   const mdxEnabled: boolean = Boolean(vpOptions?.mdx ?? false);
   const storybookEnabled: boolean = Boolean(vpOptions?.storybook ?? false);
   const prettierEnabled: boolean = Boolean(vpOptions?.prettier ?? true);
@@ -94,74 +91,51 @@ const vdustr = (
   imports(config, vpOptions?.extends?.imports);
   typescript(config, vpOptions?.extends?.typescript);
   jsonc(config, vpOptions?.extends?.jsonc);
-  if (packageJsonEnabled)
-    sortPackageJson(config, vpOptions?.extends?.sort?.packageJson);
+  if (packageJsonEnabled) sortPackageJson(config, vpOptions?.extends?.sort?.packageJson);
   sortTsconfigJson(config, vpOptions?.extends?.sort?.tsconfigJson);
   sortJsonKeys(config, vpOptions?.extends?.sort?.jsoncSortKeys);
   sortJsonArrayValues(config, vpOptions?.extends?.sort?.jsoncSortArrayValues);
   yaml(config, vpOptions?.extends?.yaml);
   react(config, vpOptions?.extends?.react);
+  pnpm(config, vpOptions?.extends?.pnpm);
 
   if (packageJsonEnabled) {
     const packageJsonOptions: undefined | packageJson.Options =
-      typeof vpOptions?.packageJson !== "object"
-        ? undefined
-        : vpOptions.packageJson;
-    config = config.append(
-      packageJson(...(!packageJsonOptions ? [] : [packageJsonOptions])),
-    );
+      typeof vpOptions?.packageJson !== "object" ? undefined : vpOptions.packageJson;
+    config = config.append(packageJson(...(!packageJsonOptions ? [] : [packageJsonOptions])));
   }
 
   if (emotionEnabled) {
     const emotionOptions: undefined | emotion.Options =
       typeof vpOptions?.emotion !== "object" ? undefined : vpOptions.emotion;
-    config = config.append(
-      emotion(...(!emotionOptions ? [] : [emotionOptions])),
-    );
+    config = config.append(emotion(...(!emotionOptions ? [] : [emotionOptions])));
   }
 
   if (tanstackQueryEnabled) {
     const tanstackQueryOptions: undefined | tanstackQuery.Options =
-      typeof vpOptions?.tanstackQuery !== "object"
-        ? undefined
-        : vpOptions.tanstackQuery;
-    config = config.append(
-      tanstackQuery(...(!tanstackQueryOptions ? [] : [tanstackQueryOptions])),
-    );
+      typeof vpOptions?.tanstackQuery !== "object" ? undefined : vpOptions.tanstackQuery;
+    config = config.append(tanstackQuery(...(!tanstackQueryOptions ? [] : [tanstackQueryOptions])));
   }
 
   if (storybookEnabled) {
     const storybookOptions: undefined | storybook.Options =
-      typeof vpOptions?.storybook !== "object"
-        ? undefined
-        : vpOptions.storybook;
-    config = config.append(
-      storybook(...(!storybookOptions ? [] : [storybookOptions])),
-    );
+      typeof vpOptions?.storybook !== "object" ? undefined : vpOptions.storybook;
+    config = config.append(storybook(...(!storybookOptions ? [] : [storybookOptions])));
   }
 
   if (mdxEnabled) {
     const mdxOptions: Extract<Options["mdx"], AnyObject> = {
       ...(typeof vpOptions?.mdx !== "object" ? null : vpOptions.mdx),
     };
-    const mdxFlatCodeBlocksEnabled: boolean = Boolean(
-      mdxOptions?.codeBlocks ?? true,
-    );
-    const mdxFlatCodeBlocksOptions: Extract<
-      (typeof mdxOptions)["codeBlocks"],
-      AnyObject
-    > = {
-      ...(typeof mdxOptions?.codeBlocks !== "object"
-        ? null
-        : mdxOptions.codeBlocks),
+    const mdxFlatCodeBlocksEnabled: boolean = Boolean(mdxOptions?.codeBlocks ?? true);
+    const mdxFlatCodeBlocksOptions: Extract<(typeof mdxOptions)["codeBlocks"], AnyObject> = {
+      ...(typeof mdxOptions?.codeBlocks !== "object" ? null : mdxOptions.codeBlocks),
     };
 
     config = config.append(
       mdx({
         ...mdxOptions,
-        codeBlocks: !mdxFlatCodeBlocksEnabled
-          ? false
-          : mdxFlatCodeBlocksOptions,
+        codeBlocks: !mdxFlatCodeBlocksEnabled ? false : mdxFlatCodeBlocksOptions,
       }),
     );
   }
@@ -169,9 +143,7 @@ const vdustr = (
   if (prettierEnabled) {
     const prettierOptions: undefined | prettier.Options =
       typeof vpOptions?.prettier !== "object" ? undefined : vpOptions.prettier;
-    config = config.append(
-      prettier(...(!prettierOptions ? [] : [prettierOptions])),
-    );
+    config = config.append(prettier(...(!prettierOptions ? [] : [prettierOptions])));
   }
 
   config.append(...(userConfigs as any));

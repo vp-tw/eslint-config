@@ -11,13 +11,9 @@ namespace storybook {
   }
 }
 
-const storybook = async (
-  options?: storybook.Options,
-): Promise<Array<TypedFlatConfigItem>> => {
+const storybook = async (options?: storybook.Options): Promise<Array<TypedFlatConfigItem>> => {
   await ensurePackages(["eslint-plugin-storybook", "storybook"]);
-  const storybookPlugin = await interopDefault(
-    import("eslint-plugin-storybook"),
-  );
+  const storybookPlugin = await interopDefault(import("eslint-plugin-storybook"));
   const inheritingConfigs = storybookPlugin.configs["flat/csf-strict"];
   const originalSetupConfig = inheritingConfigs[0] as TypedFlatConfigItem;
   const originalStoryRulesConfig = inheritingConfigs[1] as TypedFlatConfigItem;
@@ -63,11 +59,7 @@ const storybook = async (
       rules: renameRules(originalMainRulesConfig.rules ?? {}),
     },
   );
-  return [
-    setupConfig,
-    storyRulesConfig,
-    mainRulesConfig,
-  ] satisfies Array<TypedFlatConfigItem>;
+  return [setupConfig, storyRulesConfig, mainRulesConfig] satisfies Array<TypedFlatConfigItem>;
 };
 
 export { storybook };

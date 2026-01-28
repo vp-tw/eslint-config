@@ -1,4 +1,3 @@
-import type { Linter } from "eslint";
 import type { ConfigOverrides, TypedFlatConfigItem } from "../types";
 import { ensurePackages, interopDefault } from "@antfu/eslint-config";
 import { pick } from "es-toolkit";
@@ -12,20 +11,17 @@ namespace tanstackQuery {
 
 const tanstackQuery = async (options?: tanstackQuery.Options) => {
   await ensurePackages(["@tanstack/eslint-plugin-query"]);
-  const tanstackQueryPlugin = await interopDefault(
-    import("@tanstack/eslint-plugin-query"),
-  );
-  const recommended = tanstackQueryPlugin.configs[
-    "flat/recommended"
-  ] satisfies Array<Linter.Config<Linter.RulesRecord>> as [
-    Linter.Config<Linter.RulesRecord>,
-  ];
+  const tanstackQueryPlugin = await interopDefault(import("@tanstack/eslint-plugin-query"));
+  const recommendedConfigs = tanstackQueryPlugin.configs["flat/recommended"];
+  const setupConfig = recommendedConfigs[0];
+  if (!setupConfig)
+    throw new Error("Failed to load @tanstack/eslint-plugin-query recommended config.");
   const tanstackQuerySetupConfig: TypedFlatConfigItem = {
-    ...pick(recommended[0], ["plugins"]),
+    ...pick(setupConfig, ["plugins"]),
     name: "vdustr/tanstack-query/setup",
   };
   const tanstackQueryRulesConfig = mergeConfig(options?.tanstackQuery, {
-    ...recommended[0],
+    ...setupConfig,
     name: "vdustr/tanstack-query/rules",
   });
   return [tanstackQuerySetupConfig, tanstackQueryRulesConfig];

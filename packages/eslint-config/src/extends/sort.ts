@@ -1,8 +1,4 @@
-import type {
-  ConfigOverrides,
-  TypedFlatConfigItem,
-  VpComposer,
-} from "../types";
+import type { ConfigOverrides, TypedFlatConfigItem, VpComposer } from "../types";
 import { omit, pick } from "es-toolkit";
 import { GLOB_CSPELL_JSON } from "../globs";
 import { extendsConfig } from "../utils/extendsConfig";
@@ -46,10 +42,7 @@ namespace sort {
   }
 }
 
-const sortJsonKeys = async (
-  composer: VpComposer,
-  options?: sort.Options["jsoncSortKeys"],
-) => {
+const sortJsonKeys = async (composer: VpComposer, options?: sort.Options["jsoncSortKeys"]) => {
   extendsConfig(composer, "vdustr/jsonc/rules", async (config) => {
     const omittedConfig = omit(config, ignoreKeys);
     const rulesConfig = mergeConfig(
@@ -69,15 +62,9 @@ const sortJsonKeys = async (
 /**
  * Disable rules conflicting with `eslint-config-package-json`.
  */
-const sortPackageJson = async (
-  composer: VpComposer,
-  options?: sort.Options["packageJson"],
-) => {
+const sortPackageJson = async (composer: VpComposer, options?: sort.Options["packageJson"]) => {
   extendsConfig(composer, "antfu/sort/package-json", (config) => {
-    const modifiedConfig = mergeConfig(
-      pick(options ?? {}, ["files", "ignores"]),
-      config,
-    );
+    const modifiedConfig = mergeConfig(pick(options ?? {}, ["files", "ignores"]), config);
     const omittedConfig = omit(modifiedConfig, ignoreKeys);
     const rulesConfig = mergeConfig(
       options,
@@ -94,15 +81,9 @@ const sortPackageJson = async (
   });
 };
 
-const sortTsconfigJson = async (
-  composer: VpComposer,
-  options?: sort.Options["tsconfigJson"],
-) => {
+const sortTsconfigJson = async (composer: VpComposer, options?: sort.Options["tsconfigJson"]) => {
   extendsConfig(composer, "antfu/sort/tsconfig-json", (config) => {
-    const modifiedConfig = mergeConfig(
-      pick(options ?? {}, ["files", "ignores"]),
-      config,
-    );
+    const modifiedConfig = mergeConfig(pick(options ?? {}, ["files", "ignores"]), config);
     const omittedConfig = omit(modifiedConfig, ignoreKeys);
     const rulesConfig = mergeConfig(
       options,

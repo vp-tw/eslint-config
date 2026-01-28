@@ -10,13 +10,9 @@ namespace prettier {
   }
 }
 
-const prettier = async (
-  options?: prettier.Options,
-): Promise<TypedFlatConfigItem> => {
+const prettier = async (options?: prettier.Options): Promise<TypedFlatConfigItem> => {
   await ensurePackages(["eslint-config-prettier"]);
-  const eslintConfigPrettier = await interopDefault(
-    import("eslint-config-prettier"),
-  );
+  const eslintConfigPrettier = await interopDefault(import("eslint-config-prettier"));
   const rulesConfig = mergeConfig(options?.prettier, {
     ...eslintConfigPrettier,
     rules: renameRules(eslintConfigPrettier.rules),

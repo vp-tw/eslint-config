@@ -3,11 +3,18 @@
   "version": "0.2.0",
   "description": "ViPro's ESLint configuration",
   "homepage": "https://github.com/vdustr/eslint-config",
+  "license": "MIT",
   "author": {
     "name": "ViPro",
     "url": "https://vdustr.dev"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": {
@@ -33,12 +40,9 @@
     "./package": "./package.json",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/esm/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "unbuild",
     "copy": "tsx scripts/copy",
@@ -48,13 +52,25 @@
   },
   "dependencies": {
     "@mui/types": "catalog:",
+    "@typescript-eslint/utils": "catalog:",
     "es-toolkit": "catalog:",
     "eslint-flat-config-utils": "catalog:",
     "local-pkg": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@emotion/eslint-plugin": "catalog:",
+    "@tanstack/eslint-plugin-query": "catalog:",
+    "@types/eslint-config-prettier": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "eslint-plugin-mdx": "catalog:",
+    "eslint-plugin-package-json": "catalog:",
+    "eslint-plugin-react-compiler": "catalog:",
+    "eslint-plugin-storybook": "catalog:",
+    "eslint-plugin-yml": "catalog:",
     "eslint-typegen": "catalog:",
+    "storybook": "catalog:",
     "unbuild": "catalog:"
   },
   "peerDependencies": {
@@ -101,8 +117,5 @@
     "storybook": {
       "optional": true
     }
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

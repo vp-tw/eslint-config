@@ -73,10 +73,7 @@ const MyComponent: React.FC<MyComponent.Props> = (props) => {
   return (
     <div
       onClick={onClick}
-      className={cx(
-        emotionWithObjectShouldBeValid,
-        emotionWithStringShouldBeInvalid,
-      )}
+      className={cx(emotionWithObjectShouldBeValid, emotionWithStringShouldBeInvalid)}
     >
       Test
       {/* eslint-disable-next-line react-dom/no-unsafe-target-blank -- `react-dom` should validate this. */}
