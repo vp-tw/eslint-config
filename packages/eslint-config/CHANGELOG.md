@@ -1,5 +1,11 @@
 # @vp-tw/eslint-config
 
+## 1.0.2
+
+### Patch Changes
+
+- 421cfbe: fix: add explicit type annotation to `extendsConfig` to resolve TS2742 build error
+
 ## 1.0.1
 
 ### Patch Changes
