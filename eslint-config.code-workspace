@@ -2,8 +2,9 @@
   "extensions": {
     "recommendations": [
       "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode",
+      "prettier.prettier-vscode",
       "streetsidesoftware.code-spell-checker",
+      "TypeScriptTeam.native-preview",
     ],
   },
   "folders": [{ "name": "root", "path": "." }, { "path": "packages/eslint-config" }],
@@ -13,7 +14,7 @@
       "source.fixAll.eslint",
       "source.formatDocument",
     ],
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "prettier.prettier-vscode",
     "editor.formatOnSave": true,
     "eslint.rules.customizations": [
       { "fixable": true, "rule": "perfectionist/*", "severity": "off" },
@@ -54,6 +55,7 @@
       "mdx",
     ],
     "search.useParentIgnoreFiles": true,
-    "typescript.tsdk": "root/node_modules/typescript/lib",
+    "typescript.experimental.useTsgo": true,
+    "typescript.native-preview.tsdk": "node_modules/@typescript/native-preview",
   },
 }
