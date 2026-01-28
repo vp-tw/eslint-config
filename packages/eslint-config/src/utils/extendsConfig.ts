@@ -69,7 +69,7 @@ function extendsConfigInternal<
   composer: FlatConfigComposer<T, ConfigNames>,
   sourceOrIndex: StringLiteralUnion<ConfigNames, string | number>,
   config: Awaitable<Arrayable<T>> | ((config: T) => Awaitable<Arrayable<T>>),
-) {
+): void {
   pushOverations(composer, [
     async (items) => {
       const index = tryGetConfigIndex(items, sourceOrIndex);
@@ -87,7 +87,11 @@ function extendsConfigInternal<
   ]);
 }
 
-const extendsConfig = Object.assign(extendsConfigInternal, {
+const extendsConfig: typeof extendsConfigInternal & {
+  getConfigIndex: typeof getConfigIndex;
+  tryGetConfigIndex: typeof tryGetConfigIndex;
+  pushOverations: typeof pushOverations;
+} = Object.assign(extendsConfigInternal, {
   getConfigIndex,
   tryGetConfigIndex,
   pushOverations,
