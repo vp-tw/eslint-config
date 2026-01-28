@@ -13,8 +13,8 @@
     "**/LICENSE",
     "/*.code-workspace",
     "/.changeset",
+    "/.eslintignore",
     "/.git",
-    "/.prettierignore",
     "/pnpm-lock.yaml"
   ],
   "includeRegExpList": ["[ -~]"],
