@@ -35,7 +35,7 @@ const pnpm = (composer: VpComposer, options?: pnpm.Options) => {
         ],
       },
     });
-    return [config, sortKeysConfig];
+    return [modifiedConfig, sortKeysConfig];
   });
 };
 
