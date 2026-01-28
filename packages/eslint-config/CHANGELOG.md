@@ -1,5 +1,14 @@
 # @vp-tw/eslint-config
 
+## 1.0.1
+
+### Patch Changes
+
+- bc6826c: - Migrate `.prettierignore` to `.eslintignore` for ESLint ignore patterns
+  - Add ignore patterns to `.oxfmtrc.json` for oxfmt
+  - Update VSCode workspace to recommend oxc extension
+  - CI: Only run on push to main branch (PR checks still run on all PRs)
+
 ## 1.0.0
 
 ### Major Changes
