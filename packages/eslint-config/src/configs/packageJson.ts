@@ -13,9 +13,7 @@ namespace packageJson {
 
 const packageJson = async (options?: packageJson.Options) => {
   await ensurePackages(["eslint-plugin-package-json"]);
-  const packageJson = await interopDefault(
-    import("eslint-plugin-package-json"),
-  );
+  const packageJson = await interopDefault(import("eslint-plugin-package-json"));
   const recommended = packageJson.configs.recommended;
   const packageJsonSetupConfig: TypedFlatConfigItem = {
     plugins: recommended.plugins,
@@ -23,7 +21,10 @@ const packageJson = async (options?: packageJson.Options) => {
   };
   const packageJsonRulesConfig = mergeConfig(options?.packageJson, {
     ...omit(recommended, ["name", "plugins"]),
-    rules: renameRules(recommended.rules),
+    rules: renameRules({
+      ...recommended.rules,
+      "package-json/order-properties": "off",
+    }),
     name: "vdustr/package-json/rules",
   });
   return [packageJsonSetupConfig, packageJsonRulesConfig];

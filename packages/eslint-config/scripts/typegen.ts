@@ -15,13 +15,9 @@ import { tanstackQuery } from "../src/configs/tanstackQuery";
 import { imports } from "../src/extends/imports";
 import { javascript } from "../src/extends/javascript";
 import { jsonc } from "../src/extends/jsonc";
-
+import { pnpm } from "../src/extends/pnpm";
 import { react } from "../src/extends/react";
-import {
-  sortJsonArrayValues,
-  sortJsonKeys,
-  sortTsconfigJson,
-} from "../src/extends/sort";
+import { sortJsonArrayValues, sortJsonKeys, sortTsconfigJson } from "../src/extends/sort";
 import { typescript } from "../src/extends/typescript";
 import { yaml } from "../src/extends/yaml";
 
@@ -45,46 +41,74 @@ import { yaml } from "../src/extends/yaml";
 
   const extendsConfigs = await (async () => {
     const allAntfuConfigNames = [
-      "antfu/astro/setup",
-      "antfu/astro/rules",
-      "antfu/eslint-comments/rules",
-      "antfu/formatter/setup",
-      "antfu/imports/rules",
+      "antfu/gitignore",
+      "antfu/ignores",
       "antfu/javascript/setup",
       "antfu/javascript/rules",
-      "antfu/jsx/setup",
+      "antfu/eslint-comments/rules",
+      "antfu/command/rules",
+      "antfu/perfectionist/setup",
+      "antfu/node/rules",
       "antfu/jsdoc/rules",
+      "antfu/imports/rules",
+      "antfu/unicorn/rules",
+      "antfu/jsx/setup",
+      "antfu/typescript/setup",
+      "antfu/typescript/parser",
+      "antfu/typescript/type-aware-parser",
+      "antfu/typescript/rules",
+      "antfu/typescript/rules-type-aware",
+      "antfu/typescript/erasable-syntax-only",
+      "antfu/stylistic/rules",
+      "antfu/regexp/rules",
+      "antfu/test/setup",
+      "antfu/test/rules",
+      "antfu/vue/setup",
+      "antfu/vue/rules",
+      "antfu/react/setup",
+      "antfu/react/rules",
+      "antfu/react/type-aware-rules",
+      "antfu/nextjs/setup",
+      "antfu/nextjs/rules",
+      "antfu/solid/setup",
+      "antfu/solid/rules",
+      "antfu/svelte/setup",
+      "antfu/svelte/rules",
+      "antfu/unocss",
+      "antfu/astro/setup",
+      "antfu/astro/rules",
       "antfu/jsonc/setup",
       "antfu/jsonc/rules",
+      "antfu/sort/package-json",
+      "antfu/sort/tsconfig-json",
+      "antfu/pnpm/package-json",
+      "antfu/pnpm/pnpm-workspace-yaml",
+      "antfu/pnpm/pnpm-workspace-yaml-sort",
+      "antfu/yaml/setup",
+      "antfu/yaml/rules",
+      "antfu/toml/setup",
+      "antfu/toml/rules",
       "antfu/markdown/setup",
       "antfu/markdown/processor",
       "antfu/markdown/parser",
       "antfu/markdown/disables",
-      "antfu/node/rules",
-      "antfu/perfectionist/setup",
-      "antfu/react/setup",
-      "antfu/react/rules",
-      "antfu/solid/setup",
-      "antfu/solid/rules",
-      "antfu/sort/package-json",
-      "antfu/stylistic/rules",
-      "antfu/svelte/setup",
-      "antfu/svelte/rules",
-      "antfu/test/setup",
-      "antfu/test/rules",
-      "antfu/toml/setup",
-      "antfu/toml/rules",
-      "antfu/regexp/rules",
-      "antfu/typescript/setup",
-      "antfu/typescript/parser",
-      "antfu/typescript/rules",
-      "antfu/unicorn/rules",
-      "antfu/unocss",
-      "antfu/vue/setup",
-      "antfu/vue/rules",
-      "antfu/yaml/setup",
-      "antfu/yaml/rules",
-      "antfu/yaml/pnpm-workspace",
+      "antfu/formatter/setup",
+      "antfu/formatter/css",
+      "antfu/formatter/scss",
+      "antfu/formatter/less",
+      "antfu/formatter/html",
+      "antfu/formatter/xml",
+      "antfu/formatter/svg",
+      "antfu/formatter/markdown",
+      "antfu/formatter/astro",
+      "antfu/formatter/astro/disables",
+      "antfu/formatter/graphql",
+      "antfu/disables/scripts",
+      "antfu/disables/cli",
+      "antfu/disables/bin",
+      "antfu/disables/dts",
+      "antfu/disables/cjs",
+      "antfu/disables/config-files",
     ] satisfies Array<AntfuConfigNames>;
     type RuntimeAntfuConfigNames = (typeof allAntfuConfigNames)[number];
     /**
@@ -92,7 +116,7 @@ import { yaml } from "../src/extends/yaml";
      */
     undefined as unknown as RuntimeAntfuConfigNames satisfies AntfuConfigNames;
     undefined as unknown as AntfuConfigNames satisfies RuntimeAntfuConfigNames;
-    const stubAntfuConfig: ReturnType<typeof antfu> = (() => {
+    const stubAntfuConfig: ReturnType<typeof antfu> = ((): typeof stubAntfuConfig => {
       let c = composer();
       allAntfuConfigNames.forEach((name) => {
         c = c.append({ name });
@@ -108,6 +132,7 @@ import { yaml } from "../src/extends/yaml";
     sortTsconfigJson(stubAntfuConfig);
     sortJsonKeys(stubAntfuConfig);
     sortJsonArrayValues(stubAntfuConfig);
+    pnpm(stubAntfuConfig);
     return stubAntfuConfig;
   })();
 

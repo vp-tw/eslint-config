@@ -9,10 +9,12 @@
     "checkTypes": "tsc -b --noEmit",
     "commit": "cz",
     "inspect": "eslint-config-inspector",
-    "lint": "run-p lint:*",
+    "lint": "run-p lint:cspell lint:es lint:oxfmt",
     "lint:cspell": "cspell --no-summary --no-progress",
     "lint:es": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
-    "lint:prettier": "prettier --ignore-unknown --write .",
+    "lint:es:dry": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "lint:oxfmt": "oxfmt --write .",
+    "lint:oxfmt:dry": "oxfmt --check .",
     "prepare": "husky",
     "release": "changeset publish",
     "test": "vitest",
@@ -41,6 +43,7 @@
     "@total-typescript/ts-reset": "catalog:",
     "@types/fs-extra": "catalog:",
     "@types/lint-staged": "catalog:",
+    "@typescript-eslint/utils": "catalog:",
     "@vp-tw/tsconfig": "catalog:",
     "commitizen": "catalog:",
     "cspell": "catalog:",
@@ -57,16 +60,16 @@
     "husky": "catalog:",
     "jiti": "catalog:",
     "lint-staged": "catalog:",
+    "oxfmt": "catalog:",
     "pathe": "catalog:",
     "pkg-dir": "catalog:",
-    "prettier": "catalog:",
     "storybook": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },
-  "packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef",
   "engines": {
     "node": ">=24",
     "pnpm": ">=10"
-  }
+  },
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
 }

@@ -10,10 +10,7 @@ import type {
 /**
  * <https://github.com/antfu/eslint-flat-config-utils/blob/ac3a9b4/src/composer.ts#L492-L512>
  */
-function getConfigIndex(
-  configs: Array<Linter.Config>,
-  nameOrIndex: string | number,
-): number {
+function getConfigIndex(configs: Array<Linter.Config>, nameOrIndex: string | number): number {
   if (typeof nameOrIndex === "number") {
     if (nameOrIndex < 0 || nameOrIndex >= configs.length)
       throw new Error(
@@ -52,9 +49,7 @@ const tryGetConfigIndex: typeof getConfigIndex = (
 /**
  * <https://github.com/antfu/eslint-flat-config-utils/blob/ac3a9b4/src/composer.ts#L91>
  */
-type Operation<T extends object = Linter.Config> = (
-  items: Array<T>,
-) => Promise<Array<T>>;
+type Operation<T extends object = Linter.Config> = (items: Array<T>) => Promise<Array<T>>;
 
 const pushOverations = <
   T extends object = Linter.Config,
@@ -82,8 +77,7 @@ function extendsConfigInternal<
       // Do nothing if the config is not found.
       if (!source) return items;
       const newConfigs = await (async () => {
-        const awaited =
-          typeof config === "function" ? await config(source) : await config;
+        const awaited = typeof config === "function" ? await config(source) : await config;
         return Array.isArray(awaited) ? awaited : [awaited];
       })();
       const updatedItems = [...items];

@@ -1,10 +1,6 @@
 import type { ConfigOverrides, TypedFlatConfigItem } from "../types";
 
-import {
-  ensurePackages,
-  GLOB_MARKDOWN,
-  interopDefault,
-} from "@antfu/eslint-config";
+import { ensurePackages, GLOB_MARKDOWN, interopDefault } from "@antfu/eslint-config";
 import { omit, pick } from "es-toolkit";
 import { mergeConfig } from "../utils/mergeConfig";
 import { renameRules } from "../utils/renameRules";
@@ -12,23 +8,17 @@ import { renameRules } from "../utils/renameRules";
 namespace mdx {
   export interface Options {
     mdx?: ConfigOverrides;
-    processorOptions?: Omit<
-      import("eslint-plugin-mdx").ProcessorOptions,
-      "lintCodeBlocks"
-    >;
+    processorOptions?: Omit<import("eslint-plugin-mdx").ProcessorOptions, "lintCodeBlocks">;
     codeBlocks?: boolean | ConfigOverrides;
   }
 }
 
-const mdx = async ({
-  codeBlocks = true,
-  processorOptions,
-  ...options
-}: mdx.Options = {}): Promise<Array<TypedFlatConfigItem>> => {
+const mdx = async ({ codeBlocks = true, processorOptions, ...options }: mdx.Options = {}): Promise<
+  Array<TypedFlatConfigItem>
+> => {
   await ensurePackages(["eslint-plugin-mdx"]);
   const mdxPlugin = await interopDefault(await import("eslint-plugin-mdx"));
-  const codeBlocksOptions: ConfigOverrides =
-    typeof codeBlocks !== "object" ? {} : codeBlocks;
+  const codeBlocksOptions: ConfigOverrides = typeof codeBlocks !== "object" ? {} : codeBlocks;
   const setupConfig: TypedFlatConfigItem = {
     ...pick(mdxPlugin.flat, ["plugins"]),
     name: "vdustr/mdx/setup",

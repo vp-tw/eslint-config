@@ -1,8 +1,4 @@
-import type {
-  ConfigOverrides,
-  TypedFlatConfigItem,
-  VpComposer,
-} from "../types";
+import type { ConfigOverrides, TypedFlatConfigItem, VpComposer } from "../types";
 import {
   GLOB_ASTRO_TS,
   GLOB_JS,
@@ -26,10 +22,7 @@ namespace imports {
 
 const imports = (composer: VpComposer, options?: imports.Options) => {
   extendsConfig(composer, "antfu/imports/rules", (config) => {
-    const modifiedConfig = mergeConfig(
-      pick(options?.imports ?? {}, ["files", "ignores"]),
-      config,
-    );
+    const modifiedConfig = mergeConfig(pick(options?.imports ?? {}, ["files", "ignores"]), config);
     const omittedConfig = omit(modifiedConfig, ignoreKeys);
     const rulesConfig: TypedFlatConfigItem = mergeConfig(
       omit(options?.imports ?? {}, ["files", "ignores"]),

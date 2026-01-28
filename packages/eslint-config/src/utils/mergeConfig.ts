@@ -4,16 +4,12 @@ import { omit } from "es-toolkit";
 /**
  * The values of these keys are objects that need to be merged.
  */
-const objectMergeKeys = ["rules", "plugins"] as const satisfies Array<
-  keyof TypedFlatConfigItem
->;
+const objectMergeKeys = ["rules", "plugins"] as const satisfies Array<keyof TypedFlatConfigItem>;
 
 /**
  * The values of these keys allow being overridden by functions.
  */
-const mutableMergeKeys = ["files", "ignores"] as const satisfies Array<
-  keyof TypedFlatConfigItem
->;
+const mutableMergeKeys = ["files", "ignores"] as const satisfies Array<keyof TypedFlatConfigItem>;
 
 function mergeConfig(
   source?: ConfigOverrides,

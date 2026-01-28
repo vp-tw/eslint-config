@@ -1,6 +1,6 @@
 catalog:
-  foo: ^1.0.0
   # eslint-disable-next-line yaml/sort-keys -- `yaml` should validate this.
+  foo: ^1.0.0
   bar: ^2.0.0
   baz: ^3.0.0
 
