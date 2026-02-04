@@ -76,6 +76,8 @@ const vdustr = (options?: Options, ...userConfigs: Array<Config>): VpComposer =>
   const mdxEnabled: boolean = Boolean(vpOptions?.mdx ?? false);
   const storybookEnabled: boolean = Boolean(vpOptions?.storybook ?? false);
   const prettierEnabled: boolean = Boolean(vpOptions?.prettier ?? true);
+  // antfu's react is disabled by default
+  const reactEnabled: boolean = Boolean(antfuOptions?.react ?? false);
 
   let config: VpComposer = antfu({
     ...antfuOptions,
@@ -96,7 +98,9 @@ const vdustr = (options?: Options, ...userConfigs: Array<Config>): VpComposer =>
   sortJsonKeys(config, vpOptions?.extends?.sort?.jsoncSortKeys);
   sortJsonArrayValues(config, vpOptions?.extends?.sort?.jsoncSortArrayValues);
   yaml(config, vpOptions?.extends?.yaml);
-  react(config, vpOptions?.extends?.react);
+  if (reactEnabled) {
+    react(config, vpOptions?.extends?.react);
+  }
   pnpm(config, vpOptions?.extends?.pnpm);
 
   if (packageJsonEnabled) {
