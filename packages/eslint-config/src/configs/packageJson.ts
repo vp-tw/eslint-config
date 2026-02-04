@@ -23,6 +23,7 @@ const packageJson = async (options?: packageJson.Options) => {
     ...omit(recommended, ["name", "plugins"]),
     rules: renameRules({
       ...recommended.rules,
+      // sorted by oxfmt
       "package-json/order-properties": "off",
     }),
     name: "vdustr/package-json/rules",
