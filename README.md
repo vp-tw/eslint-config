@@ -85,15 +85,42 @@ export default vdustr({
 
 Automatically sorts keys in `pnpm-workspace.yaml` alphabetically using `yaml/sort-keys` rule.
 
-## Release
+## Contributing
+
+### Development
 
 ```bash
-pnpm -w v:patch # or
-pnpm -w v:minor # or
-pnpm -w v:major
-
-pnpm -r publish
+pnpm install            # Install dependencies
+pnpm build              # Build @vp-tw/eslint-config (in packages/eslint-config)
+pnpm test               # Run tests for @vp-tw/eslint-config
+pnpm run checkTypes     # Type check entire workspace
+pnpm lint               # Lint entire workspace
 ```
+
+### Release
+
+Managed by [changesets](https://github.com/changesets/changesets). CI auto-publishes when merged to main.
+
+```bash
+pnpm changeset          # Create changeset interactively
+```
+
+### Adding Dynamic Import Wrappers
+
+When adding support for optional ESLint plugins, create a wrapper in `src/lib/`:
+
+```typescript
+// src/lib/my-plugin.ts
+import type MyPlugin from "eslint-plugin-my";
+import { interopDefault } from "@antfu/eslint-config";
+
+// Explicit return type required to avoid TS2742 build errors
+const myPlugin = (): Promise<typeof MyPlugin> => interopDefault(import("eslint-plugin-my"));
+
+export { myPlugin };
+```
+
+See [CLAUDE.md](./CLAUDE.md) for detailed architecture and patterns.
 
 ## License
 
