@@ -22882,6 +22882,22 @@
       ]
     },
     {
+      "filepath": "packages/eslint-config/src/lib/eslint-react.ts",
+      "globs": [
+        "**/*.?([cm])ts",
+        "**/*.?([cm])[jt]s?(x)"
+      ],
+      "configs": [
+        16,
+        20,
+        21,
+        22,
+        27,
+        28,
+        30
+      ]
+    },
+    {
       "filepath": "packages/eslint-config/src/types.ts",
       "globs": [
         "**/*.?([cm])ts",
@@ -23346,7 +23362,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1770180057440,
+    "lastUpdate": 1770180889439,
     "basePath": "",
     "configPath": ""
   }
