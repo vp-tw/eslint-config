@@ -90,11 +90,11 @@ Automatically sorts keys in `pnpm-workspace.yaml` alphabetically using `yaml/sor
 ### Development
 
 ```bash
-pnpm install
-pnpm build              # Build package (in packages/eslint-config)
-pnpm test               # Run tests
-pnpm run checkTypes     # Type check
-pnpm lint               # Lint all
+pnpm install            # Install dependencies
+pnpm build              # Build @vp-tw/eslint-config (in packages/eslint-config)
+pnpm test               # Run tests for @vp-tw/eslint-config
+pnpm run checkTypes     # Type check entire workspace
+pnpm lint               # Lint entire workspace
 ```
 
 ### Release

@@ -53,10 +53,10 @@ extendsConfig(composer, "antfu/react/rules", async (config) => {
 ## Commands
 
 ```bash
-pnpm build              # Build the package (in packages/eslint-config)
-pnpm test               # Run tests
-pnpm run checkTypes     # Type check (root)
-pnpm lint               # Lint all (root)
+pnpm build              # Build @vp-tw/eslint-config (in packages/eslint-config)
+pnpm test               # Run tests for @vp-tw/eslint-config
+pnpm run checkTypes     # Type check entire workspace (root)
+pnpm lint               # Lint entire workspace (root)
 ```
 
 ## Release
