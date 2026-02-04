@@ -1,9 +1,9 @@
 import type { ConfigOverrides, Rules, VpComposer } from "../types";
 import { GLOB_MARKDOWN_CODE } from "@antfu/eslint-config";
-import eslintReact from "@eslint-react/eslint-plugin";
 import { omit, pick } from "es-toolkit";
 import { reactCompiler } from "../configs/reactCompiler";
 import { GLOB_MDX_CODE } from "../globs";
+import { eslintReact as importEslintReact } from "../lib/eslint-react";
 import { extendsConfig } from "../utils/extendsConfig";
 import { mergeConfig } from "../utils/mergeConfig";
 import { ignoreKeys } from "./_utils";
@@ -56,6 +56,7 @@ function renameReactRules(rules: Partial<Rules>) {
 const react = (composer: VpComposer, options?: react.Options) => {
   const typescriptEnabled: boolean = options?.typescript ?? true;
   extendsConfig(composer, "antfu/react/rules", async (config) => {
+    const eslintReact = await importEslintReact();
     const modifiedConfig = mergeConfig(pick(options?.react ?? {}, ["files", "ignores"]), config);
     const omittedConfig = omit(modifiedConfig, ignoreKeys);
     const baseConfig = typescriptEnabled
