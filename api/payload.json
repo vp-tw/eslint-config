@@ -22352,6 +22352,16 @@
       ]
     },
     {
+      "filepath": "CLAUDE.md",
+      "globs": [
+        "**/*.md"
+      ],
+      "configs": [
+        53,
+        54
+      ]
+    },
+    {
       "filepath": "README.md",
       "globs": [
         "**/*.md"
@@ -23362,7 +23372,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1770181135299,
+    "lastUpdate": 1770181552026,
     "basePath": "",
     "configPath": ""
   }
