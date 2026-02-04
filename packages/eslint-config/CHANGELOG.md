@@ -1,5 +1,11 @@
 # @vp-tw/eslint-config
 
+## 1.0.3
+
+### Patch Changes
+
+- 68031c4: Lazy load `@eslint-react/eslint-plugin` to avoid loading when `react: false`
+
 ## 1.0.2
 
 ### Patch Changes
