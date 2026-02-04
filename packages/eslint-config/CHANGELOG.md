@@ -1,5 +1,11 @@
 # @vp-tw/eslint-config
 
+## 1.0.4
+
+### Patch Changes
+
+- 71e42b2: Add contributing guide and CLAUDE.md
+
 ## 1.0.3
 
 ### Patch Changes
