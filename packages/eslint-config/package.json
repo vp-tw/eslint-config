@@ -8,10 +8,16 @@
     "name": "ViPro",
     "url": "https://vdustr.dev"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdustr/eslint-config.git",
+    "directory": "packages/eslint-config"
+  },
   "files": [
     "dist"
   ],
   "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/esm/index.mjs",
   "types": "./dist/index.d.ts",

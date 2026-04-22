@@ -13,7 +13,6 @@
     "**/LICENSE",
     "/*.code-workspace",
     "/.changeset",
-    "/.eslintignore",
     "/.git",
     "/pnpm-lock.yaml"
   ],
@@ -32,6 +31,7 @@
     "oxfmt",
     "pathe",
     "tsgo",
+    "undici",
     "unocss",
     "unrs",
     "vdustr",

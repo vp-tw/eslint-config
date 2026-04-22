@@ -28,15 +28,7 @@ Similar to [antfu/eslint-config](https://github.com/antfu/eslint-config) but wit
 
 ```ts
 // eslint.config.ts
-import { fileURLToPath } from "node:url";
-
-import { includeIgnoreFile } from "@eslint/compat";
 import { vdustr } from "@vp-tw/eslint-config";
-import path from "pathe";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const eslintignorePath = path.resolve(__dirname, ".eslintignore");
 
 export default vdustr(
   {
@@ -60,7 +52,9 @@ export default vdustr(
       },
     },
   },
-  includeIgnoreFile(eslintignorePath),
+  {
+    ignores: ["**/dist/**", "**/CHANGELOG.md", ".changeset/**"],
+  },
 );
 ```
 

@@ -8,26 +8,22 @@ import type { Linter } from "eslint";
 import type { FlatConfigComposer } from "eslint-flat-config-utils";
 import type { RuleOptions, ConfigNames as VpEslintConfigNames } from "./eslint-typegen";
 
+// Merge the project-generated rule keys into antfu's `RuleOptions` interface
+// so every `overrides?: Rules` field in antfu's option tree (including deeply
+// nested ones like `react.overrides`, `typescript.overrides`, etc.) accepts the
+// rule names contributed by this config (e.g. `react/dom-*`, `@emotion/*`,
+// `@tanstack/query/*`, `mdx/*`, `storybook/*`, `react-compiler/*`).
+declare module "@antfu/eslint-config" {
+  interface RuleOptions extends VpRuleOptions {}
+}
+
 type AnyObject = Record<PropertyKey, any>;
 
-type ObjectReplaceAntfuEslintRulesWithRulesDeeply<T extends AnyObject> =
-  // If `T` includes `AntfuEslintRules`, replace it with our `Rules`.
-  | (Extract<T, AntfuEslintRules> extends never ? never : Rules)
-  | {
-      [K in keyof T]: ReplaceAntfuEslintRulesWithVpRulesDeeply<T[K]>;
-    };
+// Alias so module augmentation above can reference the imported interface
+// without colliding with the augmented declaration.
+interface VpRuleOptions extends RuleOptions {}
 
-type ReplaceAntfuEslintRulesWithVpRulesDeeply<T> =
-  // If `T` includes `AntfuEslintRules`, replace it with our `Rules`.
-  | (Extract<T, AntfuEslintRules> extends never ? never : Rules)
-  // If `T` is an object, recursively replace its properties.
-  | (
-      | ObjectReplaceAntfuEslintRulesWithRulesDeeply<Extract<T, AnyObject>>
-      // Otherwise, keep `T` as is.
-      | Exclude<T, AnyObject>
-    );
-
-type Config = ReplaceAntfuEslintRulesWithVpRulesDeeply<NonNullable<Parameters<typeof antfu>[1]>>;
+type Config = NonNullable<Parameters<typeof antfu>[1]>;
 
 type Rules = RuleOptions & AntfuEslintRules;
 type ConfigNames = VpEslintConfigNames | AntfuEslintConfigNames;
@@ -61,7 +57,6 @@ export type {
   Config,
   ConfigNames,
   ConfigOverrides,
-  ReplaceAntfuEslintRulesWithVpRulesDeeply,
   Rules,
   TypedFlatConfigItem,
   VpComposer,

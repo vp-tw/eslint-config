@@ -1,5 +1,5 @@
 import type { ConfigOverrides, Rules, VpComposer } from "../types";
-import { GLOB_MARKDOWN_CODE } from "@antfu/eslint-config";
+import { GLOB_MARKDOWN_CODE, interopDefault } from "@antfu/eslint-config";
 import { omit, pick } from "es-toolkit";
 import { reactCompiler } from "../configs/reactCompiler";
 import { GLOB_MDX_CODE } from "../globs";
@@ -55,6 +55,22 @@ function renameReactRules(rules: Partial<Rules>) {
 
 const react = (composer: VpComposer, options?: react.Options) => {
   const typescriptEnabled: boolean = options?.typescript ?? true;
+  // antfu's `antfu/react/setup` expects sub-plugin keys that no longer exist in
+  // `@eslint-react` v4 (dom, naming-convention, rsc, web-api are all merged
+  // into the root `@eslint-react` plugin). Passing `undefined` plugins would
+  // fail ESLint's config validation.
+  extendsConfig(composer, "antfu/react/setup", async (config) => {
+    const eslintReact = await importEslintReact();
+    const reactPlugin = eslintReact.configs.all.plugins?.["@eslint-react"];
+    const reactRefresh = await interopDefault(import("eslint-plugin-react-refresh"));
+    return {
+      ...config,
+      plugins: {
+        react: reactPlugin,
+        "react-refresh": reactRefresh,
+      },
+    };
+  });
   extendsConfig(composer, "antfu/react/rules", async (config) => {
     const eslintReact = await importEslintReact();
     const modifiedConfig = mergeConfig(pick(options?.react ?? {}, ["files", "ignores"]), config);
@@ -92,7 +108,7 @@ const react = (composer: VpComposer, options?: react.Options) => {
         files: [GLOB_MARKDOWN_CODE, GLOB_MDX_CODE],
         rules: {
           "react-compiler/react-compiler": "off",
-          "react-hooks/rules-of-hooks": "off",
+          "react/rules-of-hooks": "off",
           "react-refresh/only-export-components": "off",
         },
       },
