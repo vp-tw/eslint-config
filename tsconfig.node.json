@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "types": ["node"]
+  },
   "extends": ["@vp-tw/tsconfig/base/bundler/tsconfig"],
   "include": ["./*.js", "./*.ts"]
 }

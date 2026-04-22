@@ -1,8 +1,26 @@
 import type { ConfigOverrides, TypedFlatConfigItem } from "../types";
-import { ensurePackages, interopDefault } from "@antfu/eslint-config";
+import {
+  renameRules as antfuRenameRules,
+  defaultPluginRenaming,
+  ensurePackages,
+  interopDefault,
+} from "@antfu/eslint-config";
 import { pick } from "es-toolkit";
 import { mergeConfig } from "../utils/mergeConfig";
 import { renameRules } from "../utils/renameRules";
+
+// `eslint-plugin-storybook` disables `react-hooks/rules-of-hooks` on stories
+// (so `render()` can use hooks via `@storybook/preview-api`). Route that to
+// `@eslint-react`'s `react/rules-of-hooks`, which is where hook rules live here.
+// This shim is required for any `eslint-plugin-storybook` version that still
+// emits `react-hooks/*` rules (including the current `^10.3.5`).
+const storybookPluginRenaming = {
+  ...defaultPluginRenaming,
+  "react-hooks": "react",
+};
+
+const renameStorybookRules = (rules: TypedFlatConfigItem["rules"]) =>
+  antfuRenameRules(rules ?? {}, storybookPluginRenaming);
 
 namespace storybook {
   export interface Options {
@@ -43,7 +61,7 @@ const storybook = async (options?: storybook.Options): Promise<Array<TypedFlatCo
     {
       ...originalStoryRulesConfig,
       ...originalCsfStrictConfig,
-      rules: renameRules({
+      rules: renameStorybookRules({
         ...originalStoryRulesConfig.rules,
         ...originalCsfStrictConfig.rules,
       }),

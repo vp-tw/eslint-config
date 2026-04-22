@@ -23,7 +23,6 @@
   "dependencies": {
     "@eslint/config-inspector": "catalog:",
     "es-toolkit": "catalog:",
-    "eslint-plugin-react-hooks": "catalog:",
     "eslint-plugin-react-refresh": "catalog:",
     "local-pkg": "catalog:",
     "npm-run-all": "catalog:",
@@ -43,6 +42,7 @@
     "@total-typescript/ts-reset": "catalog:",
     "@types/fs-extra": "catalog:",
     "@types/lint-staged": "catalog:",
+    "@types/node": "catalog:",
     "@typescript-eslint/utils": "catalog:",
     "@typescript/native-preview": "catalog:",
     "@vp-tw/tsconfig": "catalog:",

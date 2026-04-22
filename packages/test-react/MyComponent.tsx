@@ -34,7 +34,7 @@ const b: Array<string> = ["Hello", "world!"];
 
 path.resolve("foo", ...a, ...b);
 
-// eslint-disable-next-line react-hooks/rules-of-hooks -- `react-hooks` should validate this.
+// eslint-disable-next-line react/rules-of-hooks -- `@eslint-react` should validate this.
 const onClick = useCallback(() => {}, []);
 
 namespace MyComponent {
@@ -53,6 +53,8 @@ namespace MyComponent {
 const noop = (..._args: Array<any>) => {};
 
 const MyComponent: React.FC<MyComponent.Props> = (props) => {
+  // eslint-disable-next-line react-compiler/react-compiler -- `react-compiler` should validate this.
+  props.foo = "mutated";
   const [_unusedState] = useState(0);
   const ref = useRef(null);
   noop(ref.current);
@@ -66,8 +68,8 @@ const MyComponent: React.FC<MyComponent.Props> = (props) => {
   useEffect(() => {
     // eslint-disable-next-line no-console -- `no-console` should validate this.
     console.log({ props, data, rest });
-    // eslint-disable-next-line react-compiler/react-compiler -- `react-compiler` should validate this.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- `react-hooks` should validate this.
+
+    // eslint-disable-next-line react/exhaustive-deps -- `@eslint-react` should validate this.
   }, []);
 
   return (
@@ -76,7 +78,7 @@ const MyComponent: React.FC<MyComponent.Props> = (props) => {
       className={cx(emotionWithObjectShouldBeValid, emotionWithStringShouldBeInvalid)}
     >
       Test
-      {/* eslint-disable-next-line react-dom/no-unsafe-target-blank -- `react-dom` should validate this. */}
+      {/* eslint-disable-next-line react/dom-no-unsafe-target-blank -- `@eslint-react` should validate this. */}
       <a target="_blank" href="https://example.com">
         Test
       </a>

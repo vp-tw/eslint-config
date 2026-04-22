@@ -1,12 +1,4 @@
-import { fileURLToPath } from "node:url";
-
-import { includeIgnoreFile } from "@eslint/compat";
-import path from "pathe";
 import { vdustr } from "./packages/eslint-config/src";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const eslintignorePath = path.resolve(__dirname, ".eslintignore");
 
 export default vdustr(
   {
@@ -17,5 +9,15 @@ export default vdustr(
     mdx: true,
     storybook: true,
   },
-  includeIgnoreFile(eslintignorePath),
+  {
+    ignores: [
+      "pnpm-lock.yaml",
+      "**/dist/**",
+      "packages/eslint-config/src/eslint-typegen.d.ts",
+      ".eslint-config-inspector/**",
+      ".changeset/**",
+      "**/CHANGELOG.md",
+      "**/LICENSE",
+    ],
+  },
 );

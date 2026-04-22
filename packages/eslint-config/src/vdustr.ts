@@ -2,12 +2,7 @@ import type { OptionsConfig } from "@antfu/eslint-config";
 import type { DistributiveOmit } from "@mui/types";
 
 import type { sort } from "./extends/sort";
-import type {
-  AnyObject,
-  Config,
-  ReplaceAntfuEslintRulesWithVpRulesDeeply,
-  VpComposer,
-} from "./types";
+import type { AnyObject, Config, VpComposer } from "./types";
 import antfu from "@antfu/eslint-config";
 import { omit, pick } from "es-toolkit";
 import { emotion } from "./configs/emotion";
@@ -30,9 +25,7 @@ import {
 import { typescript } from "./extends/typescript";
 import { yaml } from "./extends/yaml";
 
-type Options = ReplaceAntfuEslintRulesWithVpRulesDeeply<
-  NonNullable<Parameters<typeof antfu>[0]>
-> & {
+interface VpOptions {
   extends?: {
     javascript?: javascript.Options;
     imports?: imports.Options;
@@ -49,8 +42,14 @@ type Options = ReplaceAntfuEslintRulesWithVpRulesDeeply<
   mdx?: boolean | mdx.Options;
   storybook?: boolean | storybook.Options;
   prettier?: boolean | prettier.Options;
-};
+}
 
+type Options = NonNullable<Parameters<typeof antfu>[0]> & VpOptions;
+
+type OwnedConfigName = keyof VpOptions;
+
+// Listed explicitly rather than derived — `satisfies` checks the array against
+// `OwnedConfigName`, but the literal tuple is what `omit` / `pick` need at runtime.
 const ownedConfigNames = [
   "extends",
   "packageJson",
@@ -59,16 +58,16 @@ const ownedConfigNames = [
   "mdx",
   "storybook",
   "prettier",
-] as const satisfies Array<keyof Options>;
+] as const satisfies ReadonlyArray<OwnedConfigName>;
 
 const vdustr = (options?: Options, ...userConfigs: Array<Config>): VpComposer => {
-  type AntfuOptions = DistributiveOmit<OptionsConfig, keyof Options>;
-  const antfuOptions: OptionsConfig = omit(
-    options ?? {},
-    ownedConfigNames,
-  ) satisfies AntfuOptions as AntfuOptions;
+  type AntfuOptions = DistributiveOmit<OptionsConfig, OwnedConfigName>;
+  // Shallow cast bypasses es-toolkit's generics instantiating over the full
+  // `Options` tree — that path exceeds TypeScript's instantiation depth.
+  const rawOptions: Record<string, unknown> = (options as unknown as Record<string, unknown>) ?? {};
+  const antfuOptions: OptionsConfig = omit(rawOptions, ownedConfigNames) as unknown as AntfuOptions;
 
-  const vpOptions = pick(options ?? {}, ownedConfigNames);
+  const vpOptions = pick(rawOptions, ownedConfigNames) as unknown as VpOptions;
 
   const packageJsonEnabled: boolean = Boolean(vpOptions?.packageJson ?? true);
   const emotionEnabled: boolean = Boolean(vpOptions?.emotion ?? false);
@@ -128,7 +127,7 @@ const vdustr = (options?: Options, ...userConfigs: Array<Config>): VpComposer =>
   }
 
   if (mdxEnabled) {
-    const mdxOptions: Extract<Options["mdx"], AnyObject> = {
+    const mdxOptions: Extract<VpOptions["mdx"], AnyObject> = {
       ...(typeof vpOptions?.mdx !== "object" ? null : vpOptions.mdx),
     };
     const mdxFlatCodeBlocksEnabled: boolean = Boolean(mdxOptions?.codeBlocks ?? true);
