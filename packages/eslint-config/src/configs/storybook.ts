@@ -12,7 +12,8 @@ import { renameRules } from "../utils/renameRules";
 // `eslint-plugin-storybook` disables `react-hooks/rules-of-hooks` on stories
 // (so `render()` can use hooks via `@storybook/preview-api`). Route that to
 // `@eslint-react`'s `react/rules-of-hooks`, which is where hook rules live here.
-// TODO: remove once `eslint-plugin-storybook` targets `@eslint-react` directly.
+// This shim is required for any `eslint-plugin-storybook` version that still
+// emits `react-hooks/*` rules (including the current `^10.3.5`).
 const storybookPluginRenaming = {
   ...defaultPluginRenaming,
   "react-hooks": "react",

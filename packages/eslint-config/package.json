@@ -123,5 +123,8 @@
     "storybook": {
       "optional": true
     }
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   }
 }

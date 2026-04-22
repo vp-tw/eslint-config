@@ -31,5 +31,16 @@ Internal changes to keep the config usable after the upstream shifts:
 Downstream consumers of `@vp-tw/eslint-config` should:
 
 1. Require Node.js `^20.19.0 || ^22.13.0 || >=24`.
-2. Update any existing `eslint-disable` comments that reference sub-plugin rule names removed in `@eslint-react` v4 (e.g. `react-dom/*` → `react/dom-*`, `react-hooks/*` → `react/*`).
+2. Update any existing `eslint-disable` comments that reference sub-plugin rule names removed in `@eslint-react` v4 — all five sub-plugin namespaces are folded into the unified `react` plugin with flat rule names:
+   - `react-dom/<rule>` → `react/dom-<rule>`
+   - `react-hooks/<rule>` → `react/<rule>`
+   - `react-hooks-extra/<rule>` → `react/hooks-extra-<rule>`
+   - `react-naming-convention/<rule>` → `react/naming-convention-<rule>`
+   - `react-web-api/<rule>` → `react/web-api-<rule>`
 3. Review any `types: []` TypeScript 6 fallout (e.g. add `@types/node` + `"types": ["node"]` in tsconfig for files that rely on Node globals).
+4. If your pnpm workspace uses `trustPolicy: no-downgrade` and you hit a downgrade error on `undici-types`, add an override for it:
+   ```yaml
+   # pnpm-workspace.yaml
+   overrides:
+     undici-types: "^8.1.0"
+   ```

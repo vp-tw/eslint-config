@@ -8,20 +8,19 @@ import type { Linter } from "eslint";
 import type { FlatConfigComposer } from "eslint-flat-config-utils";
 import type { RuleOptions, ConfigNames as VpEslintConfigNames } from "./eslint-typegen";
 
-// Merge the project-generated rule keys into antfu's `RuleOptions` interface
-// so every `overrides?: Rules` field in antfu's option tree (including deeply
-// nested ones like `react.overrides`, `typescript.overrides`, etc.) accepts the
-// rule names contributed by this config (e.g. `react/dom-*`, `@emotion/*`,
-// `@tanstack/query/*`, `mdx/*`, `storybook/*`, `react-compiler/*`).
+// Merge the project-generated rule keys into antfu's `RuleOptions` so every
+// `overrides?: Rules` field in antfu's option tree accepts the rule names
+// this config contributes (`react/dom-*`, `@emotion/*`, `@tanstack/query/*`,
+// `mdx/*`, `storybook/*`, `react-compiler/*`, ...). The aliased
+// `VpRuleOptions` is required: TS2499 forbids `extends import(...).RuleOptions`
+// inside a `declare module` block, so the local interface name is referenced.
 declare module "@antfu/eslint-config" {
   interface RuleOptions extends VpRuleOptions {}
 }
 
-type AnyObject = Record<PropertyKey, any>;
-
-// Alias so module augmentation above can reference the imported interface
-// without colliding with the augmented declaration.
 interface VpRuleOptions extends RuleOptions {}
+
+type AnyObject = Record<PropertyKey, any>;
 
 type Config = NonNullable<Parameters<typeof antfu>[1]>;
 
