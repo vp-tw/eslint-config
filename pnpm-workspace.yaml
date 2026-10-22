@@ -32,7 +32,7 @@ catalog:
   eslint-plugin-package-json: ^1.8.0
   eslint-plugin-react-compiler: 19.1.0-rc.2
   eslint-plugin-react-refresh: ^0.5.5
-  eslint-plugin-storybook: ^10.5.10
+  eslint-plugin-storybook: ^10.6.2
   eslint-plugin-svelte: ^3.23.0
   eslint-plugin-yml: ^3.8.1
   eslint-typegen: ^2.3.1
@@ -46,7 +46,7 @@ catalog:
   oxfmt: ^0.66.0
   pathe: ^2.0.3
   pkg-dir: ^9.0.0
-  storybook: ^10.5.10
+  storybook: ^10.6.2
   svelte: ^5.57.0
   tsx: ^4.23.13
   typescript: ^6.0.3
