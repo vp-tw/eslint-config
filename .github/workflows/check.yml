@@ -58,7 +58,7 @@ jobs:
         run: |
           pnpm --filter @vp-tw/eslint-config pack --pack-destination "$RUNNER_TEMP"
           tar -xzf "$RUNNER_TEMP"/vp-tw-eslint-config-*.tgz -C "$RUNNER_TEMP"
-          PACKAGE_DIR="$RUNNER_TEMP/package" pnpm exec tsx --eval '
+          PACKAGE_DIR="$RUNNER_TEMP/package" node --input-type=module --eval '
             import assert from "node:assert/strict";
             import { readFileSync } from "node:fs";
             const manifest = JSON.parse(readFileSync(process.env.PACKAGE_DIR + "/package.json", "utf8"));
@@ -67,7 +67,7 @@ jobs:
           '
           cp -R "$RUNNER_TEMP/package/dist" packages/eslint-config/consumer-dist
           trap "rm -rf packages/eslint-config/consumer-dist" EXIT
-          pnpm exec tsx --eval '
+          node --input-type=module --eval '
             import assert from "node:assert/strict";
             import { ESLint } from "eslint";
             import { vdustr } from "./packages/eslint-config/consumer-dist/esm/index.mjs";
