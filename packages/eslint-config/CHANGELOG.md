@@ -1,5 +1,11 @@
 # @vp-tw/eslint-config
 
+## 3.0.1
+
+### Patch Changes
+
+- 049a32e: Require the patched Storybook 10.6.2 optional peer and update the development tooling lockfile to the vendor security releases.
+
 ## 3.0.0
 
 ### Major Changes
