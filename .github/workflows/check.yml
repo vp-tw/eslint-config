@@ -77,8 +77,9 @@ jobs:
                 const eslint = new ESLint({ overrideConfigFile: true, overrideConfig: config });
                 const storyConfig = await eslint.calculateConfigForFile("packages/test-react/MyComponent.stories.tsx");
                 assert.equal(Boolean(storyConfig.plugins?.storybook), storybook);
-                const file = storybook ? "MyComponent.stories.tsx" : "MyComponent.tsx";
-                const results = await eslint.lintFiles(["packages/test-react/" + file]);
+                const results = storybook
+                  ? await eslint.lintFiles(["packages/test-react/MyComponent.stories.tsx"])
+                  : await eslint.lintText("export const count = 1;\n", { filePath: "packages/test-js/consumer.js" });
                 assert.equal(results.reduce((sum, result) => sum + result.errorCount, 0), 0);
               }
             }
