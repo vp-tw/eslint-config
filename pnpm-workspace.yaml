@@ -52,7 +52,7 @@ catalog:
   typescript: ^6.0.3
   unbuild: ^3.6.1
   vite: ^8.2.4
-  vitest: ^4.1.11
+  vitest: ^4.1.12
 
 minimumReleaseAgeExcludePrune: true
 
@@ -68,6 +68,7 @@ overrides:
   devalue@5.9.2: 5.9.3
   fast-uri@3.1.6: 3.1.7
   katex@0.16.47: 0.18.2
+  launch-editor@2.14.1: 2.14.2
   postcss-selector-parser@7.1.5: 7.1.6
   shell-quote@1.10.0: 1.11.0
   smol-toml@1.8.0: 1.9.0
