@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vdustr/eslint-config.git",
+    "url": "git+https://github.com/vp-tw/eslint-config.git",
     "directory": "packages/eslint-config"
   },
   "files": [
