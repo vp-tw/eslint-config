@@ -37,3 +37,51 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm run checkTypes
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Record installed tooling
+        run: |
+          node --version
+          pnpm --version
+          pnpm why vitest @vitest/mocker storybook launch-editor
+          pnpm exec tsgo --version
+          pnpm exec oxfmt --version
+      - run: pnpm exec vitest run
+      - run: pnpm --filter @vp-tw/eslint-config build
+      - name: Verify packed consumer
+        shell: bash
+        run: |
+          pnpm --filter @vp-tw/eslint-config pack --pack-destination "$RUNNER_TEMP"
+          tar -xzf "$RUNNER_TEMP"/vp-tw-eslint-config-*.tgz -C "$RUNNER_TEMP"
+          PACKAGE_DIR="$RUNNER_TEMP/package" node --input-type=module --eval '
+            import assert from "node:assert/strict";
+            import { readFileSync } from "node:fs";
+            const manifest = JSON.parse(readFileSync(process.env.PACKAGE_DIR + "/package.json", "utf8"));
+            assert.equal(manifest.peerDependencies.storybook, manifest.peerDependencies["eslint-plugin-storybook"]);
+            assert.equal(manifest.peerDependenciesMeta.storybook.optional, true);
+          '
+          cp -R "$RUNNER_TEMP/package/dist" packages/eslint-config/consumer-dist
+          trap "rm -rf packages/eslint-config/consumer-dist" EXIT
+          node --input-type=module --eval '
+            import assert from "node:assert/strict";
+            import { ESLint } from "eslint";
+            import { vdustr } from "./packages/eslint-config/consumer-dist/esm/index.mjs";
+            async function main() {
+              for (const storybook of [false, true]) {
+                const config = await vdustr({ react: true, storybook });
+                const eslint = new ESLint({ overrideConfigFile: true, overrideConfig: config });
+                const storyConfig = await eslint.calculateConfigForFile("packages/test-react/MyComponent.stories.tsx");
+                assert.equal(Boolean(storyConfig.plugins?.storybook), storybook);
+                const results = storybook
+                  ? await eslint.lintFiles(["packages/test-react/MyComponent.stories.tsx"])
+                  : await eslint.lintText("export const count = 1;\n", { filePath: "packages/test-js/consumer.js" });
+                assert.equal(results.reduce((sum, result) => sum + result.errorCount, 0), 0);
+              }
+            }
+            main().catch((error) => { console.error(error); process.exitCode = 1; });
+          '
