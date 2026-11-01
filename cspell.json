@@ -17,12 +17,19 @@
     "/pnpm-lock.yaml"
   ],
   "includeRegExpList": ["[ -~]"],
+  "overrides": [
+    {
+      "filename": "patches/commitizen@4.3.2.patch",
+      "ignoreRegExpList": ["/cov_[a-z0-9]+/g"]
+    }
+  ],
   "useGitignore": true,
   "version": "0.2",
   "words": [
     "antfu",
     "chokidar",
     "commitizen",
+    "czrc",
     "esbuild",
     "jiti",
     "jsdoc",
