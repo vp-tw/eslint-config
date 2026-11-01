@@ -22,6 +22,35 @@ Check [here](https://vp-tw.github.io/eslint-config/) to preview the ESLint inspe
 pnpm i -D eslint @antfu/eslint-config @vp-tw/eslint-config
 ```
 
+### Dependency resolution
+
+For [the minimatch globparts advisory](https://github.com/advisories/GHSA-g3hv-75wg-m249),
+this workspace resolves minimatch to the first patched version, 11.0.1.
+glob 7 and 10 depend on the older parsed-pattern representation, so they must
+also move to glob 14.0.0 when using minimatch 11. Upgrading minimatch alone can
+throw or silently omit matching files.
+
+Workspace overrides are not inherited by projects installing this package.
+For pnpm consumers with these same dependency versions, add the following to
+your own `pnpm-workspace.yaml` and regenerate your lockfile:
+
+```yaml
+overrides:
+  glob@7.2.3 || 10.5.0: 14.0.0
+  minimatch@<11.0.1: 11.0.1
+```
+
+The compatibility checks cover ESLint configuration and diagnostics, glob
+traversal, Commitizen config discovery, npm-run-all task matching, npm workspace
+exclusions and package bin expansion. Other dependency versions and package
+managers need their own compatibility checks; installing this package alone
+does not enforce these transitive resolutions.
+
+Projects also using Commitizen 4.3.2 need the workspace's
+[glob import compatibility patch](https://github.com/vp-tw/eslint-config/blob/main/patches/commitizen%404.3.2.patch)
+or an equivalent fix before overriding its glob 7 dependency. That patch is
+development tooling and is not installed with this config package.
+
 ## Usage
 
 Similar to [antfu/eslint-config](https://github.com/antfu/eslint-config) but with additional options:

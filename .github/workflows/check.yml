@@ -52,6 +52,8 @@ jobs:
           pnpm exec tsgo --version
           pnpm exec oxfmt --version
       - run: pnpm exec vitest run
+      - name: Verify dependency consumers
+        run: node .github/scripts/check-dependency-consumers.mjs
       - run: pnpm --filter @vp-tw/eslint-config build
       - name: Verify packed consumer
         shell: bash
@@ -81,6 +83,8 @@ jobs:
                   ? await eslint.lintFiles(["packages/test-react/MyComponent.stories.tsx"])
                   : await eslint.lintText("export const count = 1;\n", { filePath: "packages/test-js/consumer.js" });
                 assert.equal(results.reduce((sum, result) => sum + result.errorCount, 0), 0);
+                const [invalid] = await eslint.lintText("export const count = missingValue;\n", { filePath: "packages/test-js/consumer.js" });
+                assert.ok(invalid.messages.some((message) => message.ruleId === "no-undef"));
               }
             }
             main().catch((error) => { console.error(error); process.exitCode = 1; });
